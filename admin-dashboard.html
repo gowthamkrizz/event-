@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -249,6 +249,56 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+  
+    /* Mobile responsiveness overrides */
+    .responsive-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 768px) {
+      .responsive-grid-2 {
+        grid-template-columns: 1fr !important;
+      }
+      .main-content {
+        min-width: 0 !important;
+        overflow-x: hidden !important;
+      }
+      .topbar {
+        padding: 0 10px !important;
+      }
+      .user-profile span {
+        display: none !important;
+      }
+      .topbar-right {
+        gap: 8px !important;
+      }
+      .card {
+        padding: 16px !important;
+        overflow-x: auto;
+      }
+    }
+  
+    /* Dashboard mobile overrides for perfect alignment and zero overflow */
+    canvas {
+      max-width: 100% !important;
+      height: auto !important;
+    }
+    @media (max-width: 768px) {
+      .topbar h2 {
+        font-size: 1rem !important;
+      }
+      .user-profile img {
+        width: 32px !important;
+        height: 32px !important;
+      }
+      .dashboard-container {
+        padding: 10px !important;
+      }
+      .card {
+        padding: 12px !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -672,3 +722,7 @@
   </script>
 </body>
 </html>
+
+
+
+

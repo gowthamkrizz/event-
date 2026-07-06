@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -206,7 +206,7 @@
       padding: 30px;
     }
     
-    /* Stats Cards */
+        /* Stats Cards */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -248,6 +248,8 @@
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       padding: 24px;
+      min-width: 0;
+      overflow: hidden;
     }
     .card-header {
       display: flex;
@@ -330,6 +332,27 @@
     .btn { padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: 500; border: none; }
     .btn-primary { background: var(--primary); color: white; }
     .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-dark); }
+  
+    /* Dashboard mobile overrides for perfect alignment and zero overflow */
+    canvas {
+      max-width: 100% !important;
+      height: auto !important;
+    }
+    @media (max-width: 768px) {
+      .topbar h2 {
+        font-size: 1rem !important;
+      }
+      .user-profile img {
+        width: 32px !important;
+        height: 32px !important;
+      }
+      .dashboard-container {
+        padding: 10px !important;
+      }
+      .card {
+        padding: 12px !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -437,19 +460,19 @@
                   <td>Corporate Gala 2026</td>
                   <td>Oct 15, 2026</td>
                   <td><span class="status upcoming">Confirmed</span></td>
-                  <td><button class="btn-sm" style="background: transparent; border: 1px solid var(--border);">Manage</button></td>
+                  <td><button class="btn-sm" style="background: transparent; border: 1px solid var(--border);" onclick="window.location.href='404.html'">Manage</button></td>
                 </tr>
                 <tr>
                   <td>Tech Summit</td>
                   <td>Nov 22, 2026</td>
                   <td><span class="status upcoming">Pending Payment</span></td>
-                  <td><button class="btn-sm" style="background: var(--primary); color: white;">Pay Now</button></td>
+                  <td><button class="btn-sm" style="background: var(--primary); color: white;" onclick="window.location.href='404.html'">Pay Now</button></td>
                 </tr>
                 <tr>
                   <td>Sarah's Wedding</td>
                   <td>Jan 05, 2027</td>
                   <td><span class="status upcoming">Confirmed</span></td>
-                  <td><button class="btn-sm" style="background: transparent; border: 1px solid var(--border);">Manage</button></td>
+                  <td><button class="btn-sm" style="background: transparent; border: 1px solid var(--border);" onclick="window.location.href='404.html'">Manage</button></td>
                 </tr>
               </tbody>
             </table>
@@ -465,7 +488,7 @@
         </div>
       </div>
 
-      <div class="grid-2" style="grid-template-columns: 1fr 1fr;">
+      <div class="grid-2 responsive-grid-2">
         <!-- Recent Notifications -->
         <div class="card">
           <div class="card-header">
@@ -522,7 +545,7 @@
       <div class="card" style="margin-bottom: 24px;">
         <h3>My Bookings</h3>
         <p style="color: var(--text-light);">View and manage all your past, upcoming, and cancelled event bookings here.</p>
-        <button class="btn-sm" style="background: var(--primary); color: white; margin-top: 10px;">Browse New Events</button>
+        <button class="btn-sm" style="background: var(--primary); color: white; margin-top: 10px;" onclick="window.location.href='404.html'">Browse Upcoming Events</button>
       </div>
       
       <div class="grid-2">
@@ -593,7 +616,7 @@
         <p style="color: var(--text-light);">Events and packages you have saved for later.</p>
       </div>
       
-      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 24px;">
         <div class="card" style="padding: 0; overflow: hidden;">
           <img src="images/gallery-1.webp" alt="Event" style="width: 100%; height: 200px; object-fit: cover;">
           <div style="padding: 20px;">
@@ -601,7 +624,7 @@
             <p style="color: var(--text-light); font-size: 0.875rem;">Premium all-inclusive wedding package with exclusive venue access.</p>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px;">
               <span style="font-weight: 600; color: var(--primary);">Starting at $10k</span>
-              <button class="btn-sm" style="background: transparent; border: 1px solid var(--primary); color: var(--primary);">Book Now</button>
+              <button class="btn-sm" style="background: transparent; border: 1px solid var(--primary); color: var(--primary);" onclick="window.location.href='404.html'">Book Now</button>
             </div>
           </div>
         </div>
@@ -669,7 +692,7 @@
       <div class="card" style="padding: 40px;">
         <h3 style="margin-top: 0;">Profile Settings</h3>
         <p style="color: var(--text-light);">Update your personal information and security settings.</p>
-        <div style="margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div class="responsive-grid-2" style="margin-top: 24px;">
           <div>
             <label style="display: block; font-size: 0.875rem; margin-bottom: 8px;">Full Name</label>
             <input type="text" value="Jane Doe" style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: var(--radius-md);">
@@ -802,3 +825,9 @@
   </script>
 </body>
 </html>
+
+
+
+
+
+

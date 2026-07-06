@@ -1,0 +1,568 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Stackly</title>
+  <meta name="description" content="Get in touch with Stackly for premium event management services. Contact us for weddings, corporate events, concerts, and more.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="css/styles.css">
+
+  <style>
+    /* Contact Hero Banner */
+    .contact-hero {
+      padding: 200px 0 100px;
+      background: linear-gradient(135deg, rgba(10, 8, 6, 0.75) 0%, rgba(30, 16, 4, 0.6) 100%), url('images/gallery-2.webp') center/cover no-repeat;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+    .contact-hero .subtitle { color: rgba(255,255,255,0.85); }
+
+    /* Contact Info Cards */
+    .contact-info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+      gap: 24px;
+      margin-top: -60px;
+      position: relative;
+      z-index: 10;
+      margin-bottom: 60px;
+    }
+    .contact-info-card {
+      background: var(--bg-color);
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      border-bottom: 4px solid var(--primary);
+      transition: var(--transition);
+    }
+    .contact-info-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px -10px rgba(0,0,0,0.12);
+    }
+    .contact-info-card .card-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--primary);
+      font-size: 1.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      transition: var(--transition);
+    }
+    .contact-info-card:hover .card-icon {
+      background: var(--primary);
+      color: white;
+    }
+    .contact-info-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+    .contact-info-card p {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .contact-info-card a {
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .contact-info-card a:hover {
+      text-decoration: underline;
+    }
+
+    /* Contact Form Section */
+    .contact-form-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .contact-form-info h2 {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+    .contact-form-info p {
+      color: var(--text-light);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+    .contact-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .contact-feature .feature-icon {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      border-radius: 12px;
+      background: var(--accent);
+      color: var(--primary);
+      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .contact-feature h4 {
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+    .contact-feature p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-bottom: 0;
+      line-height: 1.5;
+    }
+
+    /* Form Card */
+    .contact-form-card {
+      background: var(--bg-color);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .contact-form-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+    .contact-form-card > p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-bottom: 28px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+      color: var(--text-dark);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #eee;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      background: var(--bg-light);
+      transition: var(--transition);
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--primary);
+      background: white;
+      box-shadow: 0 0 0 4px rgba(216, 67, 21, 0.08);
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .contact-form-card .btn-primary {
+      width: 100%;
+      padding: 16px;
+      font-size: 1.05rem;
+    }
+
+    /* Map Section */
+    .map-section {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      margin-top: 80px;
+      position: relative;
+    }
+    .map-section iframe {
+      width: 100%;
+      height: 350px;
+      border: 0;
+      filter: grayscale(100%);
+      opacity: 0.8;
+      transition: 0.4s;
+    }
+    .map-section:hover iframe {
+      filter: grayscale(0%);
+      opacity: 1;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .contact-form-section {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+    @media (max-width: 768px) {
+      .contact-hero { padding: 160px 0 80px; }
+      .contact-info-grid { margin-top: -40px; }
+      .contact-form-info h2 { font-size: 2rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form-card { padding: 28px 20px; }
+    }
+    @media (max-width: 425px) {
+      .contact-hero { padding: 140px 0 60px; }
+      .contact-info-grid { gap: 16px; }
+    }
+
+    /* Success Message */
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .form-success.show {
+      display: block;
+    }
+    .form-success .success-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--primary);
+      font-size: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes scaleIn {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .form-success h3 {
+      margin-bottom: 8px;
+      color: var(--text-dark);
+    }
+    .form-success p {
+      color: var(--text-light);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar scrolled">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <img src="stackly%20logo.webp" alt="Stackly" style="height: 40px; object-fit: contain;">
+      </a>
+      <ul class="nav-links">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+        <li class="nav-item"><a href="events.html" class="nav-link">Events</a></li>
+        <li class="nav-item"><a href="booking.html" class="nav-link">Booking</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link active">Contact</a></li>
+      </ul>
+
+      <a href="login.html" class="nav-login-btn">Login</a>
+
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Banner -->
+  <header class="contact-hero">
+    <div class="container gs-reveal">
+      <span class="hero-badge"><i class="ph ph-chat-circle-dots"></i> Let's Connect</span>
+      <h1 class="title">Get In <span class="text-orange">Touch</span></h1>
+      <p class="subtitle" style="max-width: 620px; margin: 0 auto;">Have a question or ready to plan your next unforgettable event? We'd love to hear from you.</p>
+    </div>
+  </header>
+
+  <!-- Contact Info Cards -->
+  <div class="container">
+    <div class="contact-info-grid gs-reveal">
+      <div class="contact-info-card">
+        <div class="card-icon"><i class="ph-fill ph-map-pin"></i></div>
+        <h3>Visit Us</h3>
+        <p>MMR Complex, Salem<br>Tamil Nadu, India</p>
+      </div>
+      <div class="contact-info-card">
+        <div class="card-icon"><i class="ph-fill ph-phone-call"></i></div>
+        <h3>Call Us</h3>
+        <p><a href="tel:+916346437536">+91 6346437536</a><br>Mon â€“ Sat, 9AM â€“ 7PM</p>
+      </div>
+      <div class="contact-info-card">
+        <div class="card-icon"><i class="ph-fill ph-envelope"></i></div>
+        <h3>Email Us</h3>
+        <p><a href="mailto:hello@stackly.in">hello@stackly.in</a><br>We respond within 24 hours</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Form Section -->
+  <section class="section">
+    <div class="container">
+      <div class="contact-form-section">
+
+        <!-- Left: Info -->
+        <div class="contact-form-info gs-reveal">
+          <span class="badge">Reach Out</span>
+          <h2>Let's Create Something <span class="text-orange">Extraordinary</span></h2>
+          <p>Whether you're planning a grand corporate gala, an intimate wedding, or a high-energy concert, our team is ready to turn your vision into reality.</p>
+
+          <div class="contact-feature">
+            <div class="feature-icon"><i class="ph ph-clock"></i></div>
+            <div>
+              <h4>Quick Response</h4>
+              <p>We respond to all inquiries within 24 hours during business days.</p>
+            </div>
+          </div>
+          <div class="contact-feature">
+            <div class="feature-icon"><i class="ph ph-handshake"></i></div>
+            <div>
+              <h4>Free Consultation</h4>
+              <p>Book a complimentary 30-minute session to discuss your event needs.</p>
+            </div>
+          </div>
+          <div class="contact-feature">
+            <div class="feature-icon"><i class="ph ph-globe"></i></div>
+            <div>
+              <h4>Global Reach</h4>
+              <p>We manage events worldwide with local expertise in every region.</p>
+            </div>
+          </div>
+
+          <!-- Social Links -->
+          <div style="margin-top: 32px;">
+            <h4 style="margin-bottom: 16px;">Follow Us</h4>
+            <div class="social-icons">
+              <a href="404.html"><i class="ph-fill ph-facebook-logo"></i></a>
+              <a href="404.html"><i class="ph-fill ph-instagram-logo"></i></a>
+              <a href="404.html"><i class="ph-fill ph-twitter-logo"></i></a>
+              <a href="404.html"><i class="ph-fill ph-linkedin-logo"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="contact-form-card gs-reveal" id="contactFormCard">
+          <h3>Send Us a Message</h3>
+          <p>Fill out the form below and we'll get back to you shortly.</p>
+
+          <form id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contactName">Full Name</label>
+                <input type="text" id="contactName" placeholder="John Doe" required>
+              </div>
+              <div class="form-group">
+                <label for="contactEmail">Email Address</label>
+                <input type="email" id="contactEmail" placeholder="john@example.com" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contactPhone">Phone Number</label>
+                <input type="tel" id="contactPhone" placeholder="+91 XXXXX XXXXX">
+              </div>
+              <div class="form-group">
+                <label for="contactSubject">Subject</label>
+                <select id="contactSubject" required>
+                  <option value="" disabled selected>Select a topic</option>
+                  <option value="wedding">Wedding Planning</option>
+                  <option value="corporate">Corporate Event</option>
+                  <option value="concert">Concert / DJ Night</option>
+                  <option value="birthday">Birthday / Private Party</option>
+                  <option value="other">General Inquiry</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="contactMessage">Your Message</label>
+              <textarea id="contactMessage" placeholder="Tell us about your dream event..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              Send Message <i class="ph ph-paper-plane-right"></i>
+            </button>
+          </form>
+
+          <!-- Success State -->
+          <div class="form-success" id="formSuccess">
+            <div class="success-icon"><i class="ph-fill ph-check-circle"></i></div>
+            <h3>Message Sent!</h3>
+            <p>Thank you for reaching out. Our team will get back to you within 24 hours.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Google Map -->
+      <div class="map-section gs-reveal">
+        <iframe src="https://www.google.com/maps?q=MMR+Complex,+Salem,+Tamil+Nadu&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="premium-footer">
+    <div class="container">
+      <div class="footer-grid">
+
+        <!-- Company Info -->
+        <div class="footer-widget">
+          <a href="index.html" class="logo" style="color: white; margin-bottom: 24px; display: inline-block; text-decoration: none;">
+            <img src="stackly%20logo.webp" alt="Stackly" style="height: 40px; object-fit: contain;">
+          </a>
+          <p class="footer-text">Architecting unforgettable luxury experiences for the world's most discerning clientele. Your vision, flawlessly executed.</p>
+          <div class="social-icons">
+            <a href="404.html"><i class="ph-fill ph-facebook-logo"></i></a>
+            <a href="404.html"><i class="ph-fill ph-instagram-logo"></i></a>
+            <a href="404.html"><i class="ph-fill ph-twitter-logo"></i></a>
+            <a href="404.html"><i class="ph-fill ph-linkedin-logo"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-widget">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="about.html"><i class="ph ph-caret-right"></i> About Our Journey</a></li>
+            <li><a href="services.html"><i class="ph ph-caret-right"></i> Event Services</a></li>
+            <li><a href="events.html"><i class="ph ph-caret-right"></i> Upcoming Events</a></li>
+            <li><a href="booking.html"><i class="ph ph-caret-right"></i> Secure Your Date</a></li>
+            <li><a href="login.html"><i class="ph ph-caret-right"></i> Client Portal</a></li>
+            <li><a href="contact.html"><i class="ph ph-caret-right"></i> Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Latest Events Gallery -->
+        <div class="footer-widget">
+          <h4>Event Gallery</h4>
+          <div class="footer-gallery">
+            <img src="images/gallery-1.webp" alt="Gallery">
+            <img src="images/gallery-2.webp" alt="Gallery">
+            <img src="images/gallery-3.webp" alt="Gallery">
+            <img src="images/gallery-4.webp" alt="Gallery">
+            <img src="images/gallery-5.webp" alt="Gallery">
+            <img src="images/gallery-1.webp" alt="Gallery">
+          </div>
+        </div>
+
+        <!-- Contact & Newsletter -->
+        <div class="footer-widget">
+          <h4>Get In Touch</h4>
+          <ul class="footer-contact" style="list-style: none; padding: 0; margin: 0 0 24px 0;">
+            <li><i class="ph-fill ph-map-pin"></i> MMR Complex, Salem, Tamil Nadu</li>
+            <li><i class="ph-fill ph-phone-call"></i> +91 6346437536</li>
+            <li><i class="ph-fill ph-envelope"></i> hello@stackly.in</li>
+          </ul>
+          <h4>Newsletter</h4>
+          <div class="newsletter-box">
+            <input type="email" placeholder="Email Address">
+            <button type="button"><i class="ph ph-paper-plane-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Google Map iframe -->
+      <div style="margin-bottom: 40px; border-radius: var(--radius-md); overflow: hidden; opacity: 0.8; filter: grayscale(100%); transition: 0.3s; cursor: pointer;" onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.8'">
+        <iframe src="https://www.google.com/maps?q=MMR+Complex,+Salem,+Tamil+Nadu&output=embed" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Stackly. All rights reserved. Designed for excellence.</div>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+          <a href="#">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top -->
+  <button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <i class="ph ph-arrow-up"></i>
+  </button>
+
+  <script>
+    // Scroll to Top Logic
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    if(scrollBtn) {
+      window.addEventListener('scroll', () => {
+        if(window.scrollY > 500) {
+          scrollBtn.classList.add('visible');
+        } else {
+          scrollBtn.classList.remove('visible');
+        }
+      });
+    }
+
+    // Contact Form Submission
+    const contactForm = document.getElementById('contactForm');
+    const formSuccess = document.getElementById('formSuccess');
+
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Basic validation
+        const name = document.getElementById('contactName').value.trim();
+        const email = document.getElementById('contactEmail').value.trim();
+        const message = document.getElementById('contactMessage').value.trim();
+
+        if (!name || !email || !message) {
+          alert('Please fill in all required fields.');
+          return;
+        }
+
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          alert('Please enter a valid email address.');
+          return;
+        }
+
+        // Show success
+        contactForm.style.display = 'none';
+        document.querySelector('.contact-form-card > h3').style.display = 'none';
+        document.querySelector('.contact-form-card > p').style.display = 'none';
+        formSuccess.classList.add('show');
+      });
+    }
+  </script>
+
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
+

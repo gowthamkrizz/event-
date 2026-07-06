@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -179,14 +179,16 @@
       <a href="index.html" class="logo logo-brand-orange">
             <img src="stackly%20logo.webp" alt="Stackly" style="height: 40px; object-fit: contain;">
       </a>
-      <ul class="nav-links">
+                  <ul class="nav-links">
         <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
         <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
         <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
         <li class="nav-item"><a href="events.html" class="nav-link">Events</a></li>
         <li class="nav-item"><a href="booking.html" class="nav-link">Booking</a></li>
-        <li class="nav-item"><a href="login.html" class="nav-link active">Login</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
       </ul>
+      <a href="login.html" class="nav-login-btn">Login</a>
+
       <div class="hamburger">
         <span></span>
         <span></span>
@@ -230,7 +232,7 @@
           <label>Password</label>
           <div class="input-wrapper">
             <i class="ph ph-lock"></i>
-            <input type="password" id="password" placeholder="••••••••" required>
+            <input type="password" id="password" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" required>
           </div>
           <div class="error-msg" id="passwordError">Password is required.</div>
         </div>
@@ -263,6 +265,11 @@
 
       <div class="auth-footer">
         Don't have an account? <a href="signup.html" class="text-orange" style="font-weight: 600; text-decoration: none;">Create one</a>
+      </div>
+      <div style="margin-top: 16px; text-align: center;">
+        <a href="index.html" class="btn btn-outline" style="width: 100%; border: 1px solid var(--border); color: var(--text-dark); text-decoration: none; padding: 12px; display: inline-block; box-sizing: border-box; border-radius: 8px;">
+          <i class="ph ph-arrow-left"></i> Back to Home
+        </a>
       </div>
     </div>
   </div>
@@ -321,7 +328,7 @@
               window.location.href = 'user-dashboard.html';
             }
           }, 1000);
-        }, 2000);
+        }, 1500);
       }
     });
   </script>
