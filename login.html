@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Stackly</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <style>
+    /* Animated Background */
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(-45deg, var(--bg-light), var(--accent), #fff, #ffe5d4);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      overflow-x: hidden; /* Prevent horizontal scroll from shapes */
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Floating Shapes */
+    .shape {
+      position: fixed; /* fixed so shapes don't affect document flow */
+      border-radius: 50%;
+      filter: blur(60px);
+      z-index: 0;
+      animation: float 10s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .s1 { top: -10%; left: -10%; width: min(400px, 70vw); height: min(400px, 70vw); background: rgba(255, 107, 0, 0.3); animation-delay: 0s; }
+    .s2 { bottom: -10%; right: -10%; width: min(500px, 80vw); height: min(500px, 80vw); background: rgba(255, 140, 66, 0.2); animation-delay: -5s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-30px) scale(1.05); }
+    }
+
+    .auth-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      position: relative;
+      z-index: 10;
+      margin-top: 60px; /* offset for navbar */
+    }
+
+    /* Glass Card */
+    .auth-glass {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      width: 100%;
+      max-width: 450px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+    }
+
+    .auth-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .input-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .input-group label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: var(--text-dark);
+    }
+    .input-wrapper {
+      position: relative;
+    }
+    .input-wrapper i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #999;
+      font-size: 1.25rem;
+    }
+    .input-wrapper input {
+      width: 100%;
+      padding: 14px 14px 14px 45px;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: var(--radius-md);
+      font-family: inherit;
+      outline: none;
+      background: rgba(255,255,255,0.9);
+      transition: var(--transition);
+      box-sizing: border-box; /* Prevent overflow from padding + 100% width */
+    }
+    .input-wrapper input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px var(--accent);
+    }
+    
+    .error-msg {
+      color: var(--error);
+      font-size: 0.875rem;
+      margin-top: 6px;
+      display: none;
+    }
+
+    .auth-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      font-size: 0.875rem;
+    }
+    
+    .auth-btn {
+      width: 100%;
+      padding: 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      font-size: 1rem;
+    }
+
+    .google-btn {
+      background: white;
+      color: var(--text-dark);
+      border: 1px solid #ddd;
+      margin-top: 16px;
+    }
+    .google-btn:hover {
+      background: #f9f9f9;
+    }
+
+    .auth-footer {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 0.875rem;
+    }
+
+    /* Loading Spinner */
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+      display: none;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .btn.loading .spinner { display: block; }
+    .btn.loading span { display: none; }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar scrolled">
+    <div class="container nav-container">
+      <a href="index.html" class="logo logo-brand-orange">
+            <img src="stackly%20logo.webp" alt="Stackly" style="height: 40px; object-fit: contain;">
+      </a>
+      <ul class="nav-links">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+        <li class="nav-item"><a href="events.html" class="nav-link">Events</a></li>
+        <li class="nav-item"><a href="booking.html" class="nav-link">Booking</a></li>
+        <li class="nav-item"><a href="login.html" class="nav-link active">Login</a></li>
+      </ul>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Background Shapes -->
+  <div class="shape s1"></div>
+  <div class="shape s2"></div>
+
+  <div class="auth-container">
+    <div class="auth-glass gs-reveal">
+      <div class="auth-header">
+        <h2 class="title" style="font-size: 2rem; margin-bottom: 8px;">Welcome Back</h2>
+        <p class="text-light">Sign in to manage your luxury events.</p>
+      </div>
+
+      <form id="loginForm" novalidate>
+        
+        <div class="input-group" style="text-align: center; margin-bottom: 24px;">
+          <label style="display: inline-block; margin-right: 16px; cursor: pointer;">
+            <input type="radio" name="role" value="user" checked style="accent-color: var(--primary);"> User Login
+          </label>
+          <label style="display: inline-block; cursor: pointer;">
+            <input type="radio" name="role" value="admin" style="accent-color: var(--primary);"> Admin Login
+          </label>
+        </div>
+
+        <div class="input-group">
+          <label>Email Address</label>
+          <div class="input-wrapper">
+            <i class="ph ph-envelope"></i>
+            <input type="email" id="email" placeholder="you@example.com" required>
+          </div>
+          <div class="error-msg" id="emailError">Please enter a valid email address.</div>
+        </div>
+
+        <div class="input-group">
+          <label>Password</label>
+          <div class="input-wrapper">
+            <i class="ph ph-lock"></i>
+            <input type="password" id="password" placeholder="••••••••" required>
+          </div>
+          <div class="error-msg" id="passwordError">Password is required.</div>
+        </div>
+
+        <div class="auth-options">
+          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+            <input type="checkbox" style="accent-color: var(--primary);"> Remember me
+          </label>
+          <a href="404.html" class="text-orange" style="text-decoration: none; font-weight: 500;">Forgot Password?</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary auth-btn" id="submitBtn">
+          <span>Sign In <i class="ph ph-sign-in"></i></span>
+          <div class="spinner"></div>
+        </button>
+        
+        <div style="text-align: center; margin: 20px 0; color: #999; font-size: 0.875rem;">OR</div>
+
+        <button type="button" class="btn google-btn auth-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.56 12.25C22.56 11.47 22.49 10.72 22.36 10H12V14.26H17.92C17.67 15.63 16.86 16.79 15.7 17.57V20.34H19.26C21.34 18.42 22.56 15.6 22.56 12.25Z" fill="#4285F4"/>
+            <path d="M12 23C14.97 23 17.46 22.02 19.26 20.34L15.7 17.57C14.73 18.22 13.47 18.63 12 18.63C9.16 18.63 6.75 16.71 5.88 14.14H2.21V16.98C4.01 20.56 7.7 23 12 23Z" fill="#34A853"/>
+            <path d="M5.88 14.14C5.66 13.48 5.53 12.76 5.53 12C5.53 11.24 5.66 10.52 5.88 9.86V7.02H2.21C1.47 8.5 1.05 10.19 1.05 12C1.05 13.81 1.47 15.5 2.21 16.98L5.88 14.14Z" fill="#FBBC05"/>
+            <path d="M12 5.38C13.61 5.38 15.06 5.93 16.2 7.02L19.34 3.88C17.46 2.12 14.97 1 12 1C7.7 1 4.01 3.44 2.21 7.02L5.88 9.86C6.75 7.29 9.16 5.38 12 5.38Z" fill="#EA4335"/>
+          </svg>
+          Continue with Google
+        </button>
+
+      </form>
+
+      <div class="auth-footer">
+        Don't have an account? <a href="signup.html" class="text-orange" style="font-weight: 600; text-decoration: none;">Create one</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="js/script.js"></script>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const submitBtn = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      let isValid = true;
+      
+      // Basic Email Validation
+      if(!emailInput.value || !emailInput.value.includes('@')) {
+        document.getElementById('emailError').style.display = 'block';
+        isValid = false;
+      } else {
+        document.getElementById('emailError').style.display = 'none';
+      }
+
+      // Basic Password Validation
+      if(!passwordInput.value) {
+        document.getElementById('passwordError').style.display = 'block';
+        isValid = false;
+      } else {
+        document.getElementById('passwordError').style.display = 'none';
+      }
+
+      if(isValid) {
+        // Show Loading Animation
+        submitBtn.classList.add('loading');
+        submitBtn.style.pointerEvents = 'none';
+        
+        // Simulate API call
+        setTimeout(() => {
+          submitBtn.classList.remove('loading');
+          submitBtn.innerHTML = '<span>Success! <i class="ph ph-check"></i></span>';
+          submitBtn.style.background = 'var(--success)';
+          
+          setTimeout(() => {
+            const role = document.querySelector('input[name="role"]:checked').value;
+            localStorage.setItem('userEmail', emailInput.value);
+            localStorage.setItem('userRole', role);
+            
+            if(role === 'admin') {
+              window.location.href = 'admin-dashboard.html';
+            } else {
+              window.location.href = 'user-dashboard.html';
+            }
+          }, 1000);
+        }, 2000);
+      }
+    });
+  </script>
+</body>
+</html>

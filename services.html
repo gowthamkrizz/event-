@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Services - Stackly</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Services Hero */
+    .services-hero {
+      padding: 200px 0 100px;
+      background: linear-gradient(135deg, rgba(10, 8, 6, 0.75) 0%, rgba(30, 16, 4, 0.6) 100%), url('images/gallery-2.webp') center/cover no-repeat;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+    .services-hero .subtitle { color: rgba(255,255,255,0.85); }
+    .services-hero .hero-btns { justify-content: center; margin-top: 32px; }
+    .services-hero .btn-outline { color: white; border-color: rgba(255,255,255,0.6); }
+    .services-hero .btn-outline:hover { background: white; color: var(--text-dark); border-color: white; }
+
+    /* Stats Overlay (floats over hero bottom edge) */
+    .stats-overlay {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: -55px;
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 10;
+      flex-wrap: wrap;
+    }
+    .stat-box {
+      background: var(--bg-color);
+      padding: 26px 30px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+      border-bottom: 4px solid var(--primary);
+      min-width: 170px;
+    }
+    .stat-box .stat-number { font-size: 2.25rem; font-weight: 800; color: var(--primary); }
+    .stat-box div:last-child { font-size: 0.85rem; color: var(--text-light); font-weight: 500; }
+
+    /* Process Timeline */
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+      position: relative;
+    }
+    .process-step {
+      text-align: center;
+      padding: 20px;
+    }
+    .process-num {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 800;
+      border: 2px dashed var(--primary);
+    }
+
+    .service-price {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 16px 0;
+      padding: 8px 0;
+      border-top: 1px dashed #ddd;
+      border-bottom: 1px dashed #ddd;
+    }
+    
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar scrolled">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <img src="stackly%20logo.webp" alt="Stackly" style="height: 40px; object-fit: contain;">
+      </a>
+      <ul class="nav-links">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="services.html" class="nav-link active">Services</a></li>
+        <li class="nav-item"><a href="events.html" class="nav-link">Events</a></li>
+        <li class="nav-item"><a href="booking.html" class="nav-link">Booking</a></li>
+        <li class="nav-item"><a href="login.html" class="nav-link">Login</a></li>
+      </ul>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <header class="services-hero">
+    <div class="container gs-reveal">
+      <span class="hero-badge"><i class="ph ph-medal"></i> Full-Service Event Studio</span>
+      <h1 class="title">Every Detail, <span class="text-orange">Perfected</span></h1>
+      <p class="subtitle" style="max-width: 620px; margin: 0 auto;">Comprehensive event solutions tailored for perfection. From grand galas to intimate celebrations, we handle everything — so you don't have to.</p>
+      <div class="hero-btns">
+        <a href="404.html" class="btn btn-primary">Book a Consultation <i class="ph ph-arrow-right"></i></a>
+        <a href="tel:+916346437536" class="btn btn-outline"><i class="ph ph-phone-call"></i> Call +91 6346437536</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="stats-overlay gs-reveal">
+      <div class="stat-box">
+        <div class="counter stat-number" data-target="16">0</div>
+        <div>Services Offered</div>
+      </div>
+      <div class="stat-box">
+        <div class="counter stat-number" data-target="500">0</div>
+        <div>Events Delivered</div>
+      </div>
+      <div class="stat-box">
+        <div class="counter stat-number" data-target="12">0</div>
+        <div>Years of Craft</div>
+      </div>
+      <div class="stat-box">
+        <div class="counter stat-number" data-target="100">0</div>
+        <div>% In-House Team</div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section bg-light pt-0">
+    <div class="container">
+      <div class="section-header gs-reveal">
+        <span class="badge">Browse By Category</span>
+        <h2 class="title">Our Full <span class="text-orange">Service Menu</span></h2>
+        <p class="subtitle">Sixteen specialties, one dedicated team — mix and match to build your perfect event.</p>
+      </div>
+      <div class="services-grid">
+        <!-- 1. Wedding Planning -->
+        <div class="service-card gs-reveal">
+          <div class="service-icon"><i class="ph ph-rings"></i></div>
+          <h3>Wedding Planning</h3>
+          <p>End-to-end luxury wedding curation.</p>
+          <div class="service-price">From $5,000</div>
+          <a href="404.html" class="btn btn-outline btn-sm">View Details</a>
+        </div>
+        
+        <!-- 2. Birthday Events -->
+        <div class="service-card gs-reveal">
+          <div class="service-icon"><i class="ph ph-cake"></i></div>
+          <h3>Birthday Events</h3>
+          <p>Bespoke themed celebrations.</p>
+          <div class="service-price">From $1,500</div>
+          <a href="404.html" class="btn btn-outline btn-sm">View Details</a>
+        </div>
+
+        <!-- 3. Corporate Events -->
+        <div class="service-card gs-reveal">
+          <div class="service-icon"><i class="ph ph-buildings"></i></div>
+          <h3>Corporate Events</h3>
+          <p>Professional galas and summits.</p>
+          <div class="service-price">From $10,000</div>
+          <a href="404.html" class="btn btn-outline btn-sm">View Details</a>
+        </div>
+
+        <!-- 4. Product Launches -->
+        <div class="service-card gs-reveal">
+          <div class="service-icon"><i class="ph ph-rocket"></i></div>
+          <h3>Product Launches</h3>
+          <p>Impactful brand unveilings.</p>
+          <div class="service-price">From $7,500</div>
+          <a href="404.html" class="btn btn-outline btn-sm">View Details</a>
+        </div>
+
+        <!-- 5. Conferences -->
+        <div class="service-card gs-reveal">
+          <div class="service-icon"><i class="ph ph-users-three"></i></div>
+          <h3>Conferences</h3>
+          <p>Large-scale professional networking.</p>
+          <div class="service-price">From $15,000</div>
+          <a href="404.html" class="btn btn-outline btn-sm">View Details</a>
+        </div>
+
+        <!-- 6. Concerts -->
+        <div class="service-card gs-reveal">
+          <div class="service-icon"><i class="ph ph-music-notes"></i></div>
+          <h3>Concerts</h3>
+          <p>World-class entertainment and sound.</p>
+          <div class="service-price">From $20,000</div>
+          <a href="404.html" class="btn btn-outline btn-sm">View Details</a>
+        </div>
+
+        <!-- 7. Baby Showers -->
+        <div class="service-card gs-reveal">
+          <div class="service-icon"><i class="ph ph-baby"></i></div>
+          <h3>Baby Showers</h3>
+          <p>Intimate and joyful celebrations.</p>
+          <div class="service-price">From $1,200</div>
+          <a href="404.html" class="btn btn-outline btn-sm">View Details</a>
+        </div>
+
+        <!-- 8. Engagements -->
+        <div class="service-card gs-reveal">
+          <div class="service-icon"><i class="ph ph-diamond"></i></div>
+          <h3>Engagements</h3>
+          <p>Romantic proposal setups and parties.</p>
+          <div class="service-price">From $2,500</div>
+          <a href="404.html" class="btn btn-outline btn-sm">View Details</a>
+        </div>
+
+        <!-- 9. Decoration -->
+        <div class="service-card gs-reveal">
+          <div class="service-icon"><i class="ph ph-flower-lotus"></i></div>
+          <h3>Decoration</h3>
+          <p>Floral and thematic venue styling.</p>
+          <div class="service-price">From $800</div>
+          <a href="404.html" class="btn btn-outline btn-sm">View Details</a>
+        </div>
+
+        <!-- 10. Catering -->
+        <div class="service-card gs-reveal">
+          <div class="service-icon"><i class="ph ph-fork-knife"></i></div>
+          <h3>Catering</h3>
+          <p>Gourmet multi-cuisine menus.</p>
+          <div class="service-price">From $50/plate</div>
+          <a href="404.html" class="btn btn-outline btn-sm">View Details</a>
+        </div>
+
+        <!-- 11. Photography -->
+        <div class="service-card gs-reveal">
+          <div class="service-icon"><i class="ph ph-camera"></i></div>
+          <h3>Photography</h3>
+          <p>Cinematic videography and shoots.</p>
+          <div class="service-price">From $1,500</div>
+          <a href="404.html" class="btn btn-outline btn-sm">View Details</a>
+        </div>
+
+        <!-- 12. Entertainment -->
+        <div class="service-card gs-reveal">
+          <div class="service-icon"><i class="ph ph-mask-happy"></i></div>
+          <h3>Entertainment</h3>
+          <p>Live bands, DJs, and performers.</p>
+          <div class="service-price">From $1,000</div>
+          <a href="404.html" class="btn btn-outline btn-sm">View Details</a>
+        </div>
+
+        <!-- 13. Venue Booking -->
+        <div class="service-card gs-reveal">
+          <div class="service-icon"><i class="ph ph-map-pin"></i></div>
+          <h3>Venue Booking</h3>
+          <p>Exclusive access to luxury locales.</p>
+          <div class="service-price">Varies</div>
+          <a href="404.html" class="btn btn-outline btn-sm">View Details</a>
+        </div>
+
+        <!-- 14. Lighting & Sound -->
+        <div class="service-card gs-reveal">
+          <div class="service-icon"><i class="ph ph-speaker-hifi"></i></div>
+          <h3>Lighting & Sound</h3>
+          <p>Professional AV and stage lighting.</p>
+          <div class="service-price">From $2,000</div>
+          <a href="404.html" class="btn btn-outline btn-sm">View Details</a>
+        </div>
+
+        <!-- 15. Invitation Design -->
+        <div class="service-card gs-reveal">
+          <div class="service-icon"><i class="ph ph-envelope-open"></i></div>
+          <h3>Invitation Design</h3>
+          <p>Bespoke digital & print invites.</p>
+          <div class="service-price">From $300</div>
+          <a href="404.html" class="btn btn-outline btn-sm">View Details</a>
+        </div>
+
+        <!-- 16. Event Coordination -->
+        <div class="service-card gs-reveal">
+          <div class="service-icon"><i class="ph ph-clipboard-text"></i></div>
+          <h3>Event Coordination</h3>
+          <p>On-the-day management logistics.</p>
+          <div class="service-price">From $1,500</div>
+          <a href="404.html" class="btn btn-outline btn-sm">View Details</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Work Showcase -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="section-header gs-reveal">
+        <span class="badge">Recent Work</span>
+        <h2 class="title">Services In <span class="text-orange">Action</span></h2>
+        <p class="subtitle">Real moments from events we've brought to life</p>
+      </div>
+      <div class="showcase-gallery gs-reveal">
+        <div class="showcase-item wide tall" data-lightbox="services-gallery" data-caption="Corporate gala staging">
+          <img src="images/gallery-2.webp" alt="Corporate gala">
+          <div class="zoom-icon"><i class="ph ph-magnifying-glass-plus"></i></div>
+          <div class="showcase-caption"><h4>Corporate Galas</h4><span>Staging & AV</span></div>
+        </div>
+        <div class="showcase-item" data-lightbox="services-gallery" data-caption="Floral centerpiece styling">
+          <img src="images/gallery-1.webp" alt="Floral decor">
+          <div class="zoom-icon"><i class="ph ph-magnifying-glass-plus"></i></div>
+          <div class="showcase-caption"><h4>Decoration</h4><span>Floral styling</span></div>
+        </div>
+        <div class="showcase-item" data-lightbox="services-gallery" data-caption="Live entertainment and DJ setup">
+          <img src="images/gallery-4.webp" alt="Concert lighting">
+          <div class="zoom-icon"><i class="ph ph-magnifying-glass-plus"></i></div>
+          <div class="showcase-caption"><h4>Entertainment</h4><span>Lighting & sound</span></div>
+        </div>
+        <div class="showcase-item" data-lightbox="services-gallery" data-caption="Gourmet catering presentation">
+          <img src="images/gallery-5.webp" alt="Catering setup">
+          <div class="zoom-icon"><i class="ph ph-magnifying-glass-plus"></i></div>
+          <div class="showcase-caption"><h4>Catering</h4><span>Fine dining</span></div>
+        </div>
+        <div class="showcase-item wide" data-lightbox="services-gallery" data-caption="Wedding ceremony arch and seating">
+          <img src="images/gallery-3.webp" alt="Wedding ceremony">
+          <div class="zoom-icon"><i class="ph ph-magnifying-glass-plus"></i></div>
+          <div class="showcase-caption"><h4>Weddings</h4><span>Ceremony design</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="section">
+    <div class="container">
+      <div class="split-block">
+        <div class="gs-reveal img-reveal" style="height: 420px;">
+          <img src="images/gallery-2.webp" alt="Event coordination team at work">
+          <div class="reveal-panel"></div>
+          <div class="float-badge">
+            <i class="ph-fill ph-medal"></i>
+            <div><strong>16+ Services</strong><span>All handled in-house</span></div>
+          </div>
+        </div>
+        <div class="gs-reveal">
+          <span class="badge">Why Choose Us</span>
+          <h2 class="title">One Team, <span class="text-orange">Every Detail</span></h2>
+          <p style="color: var(--text-light); margin-bottom: 20px;">From the first consultation to the last guest leaving, a single dedicated Stackly team manages every vendor, timeline, and detail — so nothing falls between the cracks.</p>
+          <ul style="display: grid; gap: 14px; margin-bottom: 30px;">
+            <li style="display: flex; align-items: center; gap: 12px;"><i class="ph-fill ph-check-circle text-orange" style="font-size: 1.3rem;"></i> Dedicated event manager from day one</li>
+            <li style="display: flex; align-items: center; gap: 12px;"><i class="ph-fill ph-check-circle text-orange" style="font-size: 1.3rem;"></i> Vetted network of premium vendors</li>
+            <li style="display: flex; align-items: center; gap: 12px;"><i class="ph-fill ph-check-circle text-orange" style="font-size: 1.3rem;"></i> Transparent pricing, zero surprises</li>
+            <li style="display: flex; align-items: center; gap: 12px;"><i class="ph-fill ph-check-circle text-orange" style="font-size: 1.3rem;"></i> On-site coordination day-of</li>
+          </ul>
+          <a href="booking.html" class="btn btn-primary">Book a Consultation <i class="ph ph-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How We Work -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header gs-reveal">
+        <span class="badge">How We Work</span>
+        <h2 class="title">From First Call To <span class="text-orange">Final Toast</span></h2>
+        <p class="subtitle">A simple four-step journey, no matter which services you choose.</p>
+      </div>
+      <div class="process-grid">
+        <div class="process-step gs-reveal">
+          <div class="process-num">01</div>
+          <h3>Consult</h3>
+          <p class="text-light">Share your vision, budget, and date — we map out what's possible in a free discovery call.</p>
+        </div>
+        <div class="process-step gs-reveal">
+          <div class="process-num">02</div>
+          <h3>Design</h3>
+          <p class="text-light">Our team builds a tailored proposal: venue, decor, catering, and entertainment options.</p>
+        </div>
+        <div class="process-step gs-reveal">
+          <div class="process-num">03</div>
+          <h3>Coordinate</h3>
+          <p class="text-light">Vendors, timelines, and logistics are managed end-to-end by your dedicated event manager.</p>
+        </div>
+        <div class="process-step gs-reveal">
+          <div class="process-num">04</div>
+          <h3>Celebrate</h3>
+          <p class="text-light">We're on-site every minute of the event so you can simply enjoy it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section bg-light">
+    <div class="container" style="max-width: 800px;">
+      <div class="section-header gs-reveal">
+        <span class="badge">FAQ</span>
+        <h2 class="title">Service <span class="text-orange">Questions</span></h2>
+      </div>
+      <div class="accordion">
+        <div class="accordion-item gs-reveal" style="background: white; margin-bottom: 16px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+          <button class="accordion-header" style="width: 100%; text-align: left; padding: 24px; background: none; border: none; font-weight: 600; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: space-between;">
+            Can I combine multiple services into one package? <i class="ph ph-caret-down"></i>
+          </button>
+          <div class="accordion-body" style="padding: 0 24px 24px; display: none; color: #666;">
+            Absolutely — most clients mix decoration, catering, and entertainment into a single custom package. Your event manager will bundle pricing for you.
+          </div>
+        </div>
+        <div class="accordion-item gs-reveal" style="background: white; margin-bottom: 16px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+          <button class="accordion-header" style="width: 100%; text-align: left; padding: 24px; background: none; border: none; font-weight: 600; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: space-between;">
+            Do you work outside Tamil Nadu? <i class="ph ph-caret-down"></i>
+          </button>
+          <div class="accordion-body" style="padding: 0 24px 24px; display: none; color: #666;">
+            Yes, our core team is based in Salem, but we regularly travel across India for weddings, corporate events, and destination celebrations.
+          </div>
+        </div>
+        <div class="accordion-item gs-reveal" style="background: white; margin-bottom: 16px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+          <button class="accordion-header" style="width: 100%; text-align: left; padding: 24px; background: none; border: none; font-weight: 600; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: space-between;">
+            How is pricing calculated? <i class="ph ph-caret-down"></i>
+          </button>
+          <div class="accordion-body" style="padding: 0 24px 24px; display: none; color: #666;">
+            Pricing depends on guest count, venue, and selected add-ons. Every quote is itemized with no hidden fees — what you approve is what you pay.
+          </div>
+        </div>
+        <div class="accordion-item gs-reveal" style="background: white; margin-bottom: 16px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+          <button class="accordion-header" style="width: 100%; text-align: left; padding: 24px; background: none; border: none; font-weight: 600; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: space-between;">
+            Can I request a custom service not listed here? <i class="ph ph-caret-down"></i>
+          </button>
+          <div class="accordion-body" style="padding: 0 24px 24px; display: none; color: #666;">
+            Of course. Tell us what you have in mind on your discovery call and we'll source the right vendors and talent for it.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer (Component Reused) -->
+  <!-- Premium Footer -->
+  <footer class="premium-footer">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <!-- Company Info -->
+        <div class="footer-widget">
+          <a href="index.html" class="logo" style="color: white; margin-bottom: 24px; display: inline-block; text-decoration: none;">
+            <img src="stackly%20logo.webp" alt="Stackly" style="height: 40px; object-fit: contain;">
+          </a>
+          <p class="footer-text">Architecting unforgettable luxury experiences for the world's most discerning clientele. Your vision, flawlessly executed.</p>
+          <div class="social-icons">
+            <a href="404.html"><i class="ph-fill ph-facebook-logo"></i></a>
+            <a href="404.html"><i class="ph-fill ph-instagram-logo"></i></a>
+            <a href="404.html"><i class="ph-fill ph-twitter-logo"></i></a>
+            <a href="404.html"><i class="ph-fill ph-linkedin-logo"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-widget">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="about.html"><i class="ph ph-caret-right"></i> About Our Journey</a></li>
+            <li><a href="services.html"><i class="ph ph-caret-right"></i> Event Services</a></li>
+            <li><a href="events.html"><i class="ph ph-caret-right"></i> Upcoming Events</a></li>
+            <li><a href="booking.html"><i class="ph ph-caret-right"></i> Secure Your Date</a></li>
+            <li><a href="login.html"><i class="ph ph-caret-right"></i> Client Portal</a></li>
+          </ul>
+        </div>
+
+        <!-- Latest Events Gallery -->
+        <div class="footer-widget">
+          <h4>Event Gallery</h4>
+          <div class="footer-gallery">
+            <img src="images/gallery-1.webp" alt="Gallery">
+            <img src="images/gallery-2.webp" alt="Gallery">
+            <img src="images/gallery-3.webp" alt="Gallery">
+            <img src="images/gallery-4.webp" alt="Gallery">
+            <img src="images/gallery-5.webp" alt="Gallery">
+            <img src="images/gallery-1.webp" alt="Gallery">
+          </div>
+        </div>
+
+        <!-- Contact & Newsletter -->
+        <div class="footer-widget">
+          <h4>Get In Touch</h4>
+          <ul class="footer-contact" style="list-style: none; padding: 0; margin: 0 0 24px 0;">
+            <li><i class="ph-fill ph-map-pin"></i> MMR Complex, Salem, Tamil Nadu</li>
+            <li><i class="ph-fill ph-phone-call"></i> +91 6346437536</li>
+            <li><i class="ph-fill ph-envelope"></i> hello@stackly.in</li>
+          </ul>
+          <h4>Newsletter</h4>
+          <div class="newsletter-box">
+            <input type="email" placeholder="Email Address">
+            <button type="button"><i class="ph ph-paper-plane-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Google Map iframe -->
+      <div style="margin-bottom: 40px; border-radius: var(--radius-md); overflow: hidden; opacity: 0.8; filter: grayscale(100%); transition: 0.3s; cursor: pointer;" onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.8'">
+        <iframe src="https://www.google.com/maps?q=MMR+Complex,+Salem,+Tamil+Nadu&output=embed" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Stackly. All rights reserved. Designed for excellence.</div>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+          <a href="#">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top -->
+  <button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <i class="ph ph-arrow-up"></i>
+  </button>
+
+  <script>
+    // Scroll to Top Logic
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    if(scrollBtn) {
+      window.addEventListener('scroll', () => {
+        if(window.scrollY > 500) {
+          scrollBtn.classList.add('visible');
+        } else {
+          scrollBtn.classList.remove('visible');
+        }
+      });
+    }
+  </script>
+
+
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

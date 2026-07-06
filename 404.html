@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found | Stackly</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-light);
+      overflow: hidden; /* Prevent scrolling for the full-screen 404 */
+    }
+
+    /* Floating Background Elements (Party Theme) */
+    .party-element {
+      position: absolute;
+      z-index: 0;
+      opacity: 0.6;
+      animation: floatUp 15s linear infinite;
+    }
+    .balloon {
+      width: 60px;
+      height: 75px;
+      border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+      background: var(--primary);
+      position: absolute;
+    }
+    .balloon::before {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 10px solid var(--primary);
+    }
+    .balloon::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      left: 50%;
+      width: 2px;
+      height: 30px;
+      background: rgba(0,0,0,0.2);
+    }
+
+    .b1 { left: 15%; bottom: -100px; animation-duration: 12s; background: var(--primary); }
+    .b2 { left: 85%; bottom: -100px; animation-duration: 18s; background: var(--secondary); animation-delay: 2s; }
+    .b3 { left: 50%; bottom: -100px; animation-duration: 15s; background: var(--text-dark); animation-delay: 5s; }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(-10deg); opacity: 0; }
+      10% { opacity: 0.6; }
+      50% { transform: translateY(-50vh) rotate(10deg); }
+      90% { opacity: 0.6; }
+      100% { transform: translateY(-120vh) rotate(-10deg); opacity: 0; }
+    }
+
+    /* 404 Container */
+    .error-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      z-index: 10;
+      margin-top: 70px; /* Offset for navbar */
+    }
+
+    .error-code {
+      font-size: 10rem;
+      font-weight: 800;
+      line-height: 1;
+      margin: 0;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 20px 40px rgba(255, 107, 0, 0.2);
+      animation: pulse 3s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .error-message {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin: 20px 0 10px;
+    }
+    
+    .error-desc {
+      font-size: 1.125rem;
+      color: var(--text-light);
+      max-width: 500px;
+      margin-bottom: 40px;
+    }
+
+    /* Search Bar */
+    .search-box {
+      display: flex;
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow-md);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      background: white;
+    }
+    .search-box input {
+      flex: 1;
+      padding: 16px 24px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+    .search-box button {
+      padding: 0 24px;
+      background: var(--text-dark);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 1.25rem;
+      transition: var(--transition);
+    }
+    .search-box button:hover {
+      background: var(--primary);
+    }
+
+    /* Quick Action Buttons */
+    .error-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    /* Social Icons (light variant for 404 page) */
+    .error-social {
+      display: flex;
+      gap: 14px;
+      margin-top: 10px;
+    }
+    .error-social a {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: white;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+    .error-social a:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-4px);
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Animated Balloons -->
+  <div class="balloon party-element b1"></div>
+  <div class="balloon party-element b2"></div>
+  <div class="balloon party-element b3"></div>
+
+  <!-- 404 Content -->
+  <div class="error-container gs-reveal">
+    <div class="error-code">404</div>
+    <h2 class="error-message">Looks like this event was cancelled.</h2>
+    <p class="error-desc">We can't seem to find the page you're looking for. It might have been moved, deleted, or perhaps it never existed at all!</p>
+    
+    <div class="error-actions">
+      <a href="javascript:history.back()" class="btn btn-primary" style="padding: 16px 32px; font-size: 1.125rem; border-radius: var(--radius-full);">
+        <i class="ph ph-arrow-left"></i> Back to Previous
+      </a>
+      <a href="index.html" class="btn btn-outline" style="padding: 16px 32px; font-size: 1.125rem; border-radius: var(--radius-full);">
+        <i class="ph ph-house"></i> Back to Home
+      </a>
+    </div>
+  </div>
+
+
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

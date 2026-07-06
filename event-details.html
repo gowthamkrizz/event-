@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Details - Stackly</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <style>
+    /* Event Details Banner */
+    .event-banner {
+      height: 60vh;
+      background: url('images/gallery-2.webp') center/cover no-repeat;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 60px;
+    }
+    .event-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    }
+    .banner-content {
+      position: relative;
+      z-index: 2;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      width: 100%;
+    }
+
+    /* Layout */
+    .details-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px;
+      margin-top: -30px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .main-column {
+      background: white;
+      padding: 40px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .sidebar-column {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .sidebar-card {
+      background: white;
+      padding: 30px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Timeline Schedule */
+    .schedule-timeline {
+      border-left: 2px dashed #ddd;
+      margin-left: 20px;
+      padding-left: 30px;
+    }
+    .schedule-item {
+      position: relative;
+      margin-bottom: 30px;
+    }
+    .schedule-item::before {
+      content: '';
+      position: absolute;
+      left: -37px;
+      top: 0;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 0 4px var(--accent);
+    }
+    
+    /* Image Gallery */
+    .event-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .event-gallery > div {
+      overflow: hidden;
+      border-radius: var(--radius-md);
+    }
+    .event-gallery img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .event-gallery > div:hover img {
+      transform: scale(1.1);
+    }
+
+    /* Speakers */
+    .speakers-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .speaker-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      border: 1px solid #eee;
+      border-radius: var(--radius-md);
+    }
+    .speaker-card img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; }
+    
+    /* Reviews */
+    .review-card {
+      padding: 20px;
+      background: var(--bg-color);
+      border: 1px solid #eee;
+      border-radius: var(--radius-md);
+      margin-bottom: 16px;
+    }
+    .stars { color: var(--warning); margin-bottom: 8px; }
+  </style>
+</head>
+<body class="bg-light">
+
+  <nav class="navbar scrolled">
+    <div class="container nav-container">
+      <a href="index.html" class="logo"><img src="stackly%20logo.webp" alt="Stackly" style="height: 40px; object-fit: contain;"></a>
+      <ul class="nav-links">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+        <li class="nav-item"><a href="events.html" class="nav-link active">Events</a></li>
+        <li class="nav-item"><a href="booking.html" class="nav-link">Booking</a></li>
+      </ul>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Banner -->
+  <header class="event-banner">
+    <div class="container banner-content gs-reveal">
+      <div>
+        <span class="badge" style="background: var(--primary); color: white;">Tech Conference</span>
+        <h1 style="font-size: 3rem; margin-top: 16px;">Global Tech Summit 2026</h1>
+        <p style="font-size: 1.125rem; color: #ddd; margin-top: 8px;"><i class="ph-fill ph-map-pin"></i> Moscone Center, San Francisco, CA</p>
+      </div>
+      <div style="text-align: right;">
+        <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary);">$299</div>
+        <p>Starting Price</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container details-layout">
+      
+      <!-- Left Column -->
+      <div class="main-column gs-reveal">
+        <h2 class="title" style="font-size: 2rem;">About This Event</h2>
+        <p class="text-light" style="margin-bottom: 40px;">Join industry leaders and innovators at the premier technology summit of the year. Explore cutting-edge advancements in AI, Web3, and sustainable tech through immersive workshops and keynote addresses.</p>
+        
+        <h3 style="margin-bottom: 24px; font-size: 1.5rem;">Event Gallery</h3>
+        <div class="event-gallery" style="margin-bottom: 40px;">
+          <div data-lightbox="event-gallery" data-caption="Main stage keynote" style="cursor: pointer;">
+            <img src="images/gallery-2.webp" alt="Main stage">
+          </div>
+          <div data-lightbox="event-gallery" data-caption="Networking lounge" style="cursor: pointer;">
+            <img src="images/gallery-1.webp" alt="Networking lounge">
+          </div>
+          <div data-lightbox="event-gallery" data-caption="Evening reception" style="cursor: pointer;">
+            <img src="images/gallery-3.webp" alt="Evening reception">
+          </div>
+          <div data-lightbox="event-gallery" data-caption="Breakout workshop session" style="cursor: pointer;">
+            <img src="images/gallery-4.webp" alt="Workshop session">
+          </div>
+          <div data-lightbox="event-gallery" data-caption="Attendee check-in" style="cursor: pointer;">
+            <img src="images/gallery-5.webp" alt="Attendee check-in">
+          </div>
+        </div>
+
+        <h3 style="margin-bottom: 24px; font-size: 1.5rem;">Schedule Timeline</h3>
+        <div class="schedule-timeline" style="margin-bottom: 40px;">
+          <div class="schedule-item">
+            <h4 class="text-orange">09:00 AM</h4>
+            <h5>Registration & Welcome Breakfast</h5>
+            <p class="text-light">Check-in and networking at the main lobby.</p>
+          </div>
+          <div class="schedule-item">
+            <h4 class="text-orange">10:30 AM</h4>
+            <h5>Opening Keynote by Satya Nadella</h5>
+            <p class="text-light">The future of AI and enterprise cloud computing.</p>
+          </div>
+          <div class="schedule-item">
+            <h4 class="text-orange">01:00 PM</h4>
+            <h5>Interactive Workshops</h5>
+            <p class="text-light">Breakout sessions in halls A, B, and C.</p>
+          </div>
+        </div>
+
+        <h3 style="margin-bottom: 24px; font-size: 1.5rem;">Speakers & Hosts</h3>
+        <div class="speakers-grid" style="margin-bottom: 40px;">
+          <div class="speaker-card">
+            <img src="images/avatar-1.webp">
+            <div>
+              <h4 style="margin: 0;">Mark Davis</h4>
+              <p class="text-light" style="font-size: 0.875rem;">CTO, InnovateX</p>
+            </div>
+          </div>
+          <div class="speaker-card">
+            <img src="images/avatar-2.webp">
+            <div>
+              <h4 style="margin: 0;">Sarah Jenkins</h4>
+              <p class="text-light" style="font-size: 0.875rem;">Lead Researcher</p>
+            </div>
+          </div>
+        </div>
+        
+        <h3 style="margin-bottom: 24px; font-size: 1.5rem;">Venue Map</h3>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.12345!2d-122.40123!3d37.78456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDQ3JzA0LjQiTiAxMjLCsDI0JzA0LjQiVw!5e0!3m2!1sen!2sus!4v1610000000000!5m2!1sen!2sus" width="100%" height="300" style="border:0; border-radius: var(--radius-md);" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+
+      <!-- Right Sidebar -->
+      <div class="sidebar-column gs-reveal">
+        
+        <!-- Booking CTA -->
+        <div class="sidebar-card" style="position: sticky; top: 100px;">
+          <div style="background: var(--accent); color: var(--primary); padding: 12px; border-radius: var(--radius-md); text-align: center; font-weight: 700; margin-bottom: 24px;">
+            Starts in: 12d 08h 45m
+          </div>
+          
+          <h3 style="margin-bottom: 16px;">Ticket Details</h3>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid #eee; padding-bottom: 12px;">
+            <span class="text-light">Standard Pass</span>
+            <strong>$299</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 24px;">
+            <span class="text-light">VIP Pass</span>
+            <strong>$599</strong>
+          </div>
+          
+          <a href="404.html" class="btn btn-primary" style="width: 100%;">Book Ticket Now</a>
+        </div>
+
+        <!-- Organizer -->
+        <div class="sidebar-card">
+          <h3 style="margin-bottom: 16px;">Organizer</h3>
+          <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+            <div style="width: 50px; height: 50px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700;">TC</div>
+            <div>
+              <h4 style="margin: 0;">TechCorp Global</h4>
+              <span class="text-light" style="font-size: 0.875rem;">Verified Organizer <i class="ph-fill ph-check-circle" style="color: var(--success);"></i></span>
+            </div>
+          </div>
+          <button class="btn btn-outline btn-sm" style="width: 100%;" onclick="window.location.href='404.html'">Contact Organizer</button>
+        </div>
+
+        <!-- Reviews -->
+        <div class="sidebar-card">
+          <h3 style="margin-bottom: 16px;">Past Reviews</h3>
+          <div class="review-card">
+            <div class="stars">
+              <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+            </div>
+            <p style="font-size: 0.875rem; color: var(--text-dark);">"Incredible experience last year! The networking was top-notch."</p>
+            <strong style="font-size: 0.875rem;">- John D.</strong>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Premium Footer -->
+  <footer class="premium-footer">
+    <div class="container">
+      <div class="footer-grid">
+
+        <!-- Company Info -->
+        <div class="footer-widget">
+          <a href="index.html" class="logo" style="color: white; margin-bottom: 24px; display: inline-block; text-decoration: none;">
+            <img src="stackly%20logo.webp" alt="Stackly" style="height: 40px; object-fit: contain;">
+          </a>
+          <p class="footer-text">Architecting unforgettable luxury experiences for the world's most discerning clientele. Your vision, flawlessly executed.</p>
+          <div class="social-icons">
+            <a href="404.html"><i class="ph-fill ph-facebook-logo"></i></a>
+            <a href="404.html"><i class="ph-fill ph-instagram-logo"></i></a>
+            <a href="404.html"><i class="ph-fill ph-twitter-logo"></i></a>
+            <a href="404.html"><i class="ph-fill ph-linkedin-logo"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-widget">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="about.html"><i class="ph ph-caret-right"></i> About Our Journey</a></li>
+            <li><a href="services.html"><i class="ph ph-caret-right"></i> Event Services</a></li>
+            <li><a href="events.html"><i class="ph ph-caret-right"></i> Upcoming Events</a></li>
+            <li><a href="booking.html"><i class="ph ph-caret-right"></i> Secure Your Date</a></li>
+            <li><a href="login.html"><i class="ph ph-caret-right"></i> Client Portal</a></li>
+          </ul>
+        </div>
+
+        <!-- Latest Events Gallery -->
+        <div class="footer-widget">
+          <h4>Event Gallery</h4>
+          <div class="footer-gallery">
+            <img src="images/gallery-1.webp" alt="Gallery">
+            <img src="images/gallery-2.webp" alt="Gallery">
+            <img src="images/gallery-3.webp" alt="Gallery">
+            <img src="images/gallery-4.webp" alt="Gallery">
+            <img src="images/gallery-5.webp" alt="Gallery">
+            <img src="images/gallery-1.webp" alt="Gallery">
+          </div>
+        </div>
+
+        <!-- Contact & Newsletter -->
+        <div class="footer-widget">
+          <h4>Get In Touch</h4>
+          <ul class="footer-contact" style="list-style: none; padding: 0; margin: 0 0 24px 0;">
+            <li><i class="ph-fill ph-map-pin"></i> MMR Complex, Salem, Tamil Nadu</li>
+            <li><i class="ph-fill ph-phone-call"></i> +91 6346437536</li>
+            <li><i class="ph-fill ph-envelope"></i> hello@stackly.in</li>
+          </ul>
+          <h4>Newsletter</h4>
+          <div class="newsletter-box">
+            <input type="email" placeholder="Email Address">
+            <button type="button" onclick="window.location.href='404.html'"><i class="ph ph-paper-plane-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Google Map iframe -->
+      <div style="margin-bottom: 40px; border-radius: var(--radius-md); overflow: hidden; opacity: 0.8; filter: grayscale(100%); transition: 0.3s; cursor: pointer;" onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.8'">
+        <iframe src="https://www.google.com/maps?q=MMR+Complex,+Salem,+Tamil+Nadu&output=embed" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Stackly. All rights reserved. Designed for excellence.</div>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+          <a href="#">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top -->
+  <button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <i class="ph ph-arrow-up"></i>
+  </button>
+
+  <script>
+    // Scroll to Top Logic
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    if(scrollBtn) {
+      window.addEventListener('scroll', () => {
+        if(window.scrollY > 500) {
+          scrollBtn.classList.add('visible');
+        } else {
+          scrollBtn.classList.remove('visible');
+        }
+      });
+    }
+  </script>
+
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Event Management</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Icons (Phosphor Icons - clean and premium) -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Background Shapes -->
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <img src="stackly%20logo.webp" alt="Stackly" style="height: 40px; object-fit: contain;">
+      </a>
+      
+      <ul class="nav-links">
+        <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+        <li class="nav-item"><a href="events.html" class="nav-link">Events</a></li>
+        <li class="nav-item"><a href="booking.html" class="nav-link">Booking</a></li>
+        <li class="nav-item"><a href="login.html" class="nav-link">Login</a></li>
+      </ul>
+
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <video autoplay muted loop playsinline class="hero-bg" poster="images/gallery-1.webp">
+      <source src="./images/mixkit-dj-playing-music-at-a-nightclub-831-hd-ready.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    
+    <div class="container relative z-10">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="ph ph-sparkle"></i> Premium Event Architecture
+        </div>
+        <h1 class="hero-title">Crafting Unforgettable <br><span class="text-orange typing-text"></span></h1>
+        <p class="hero-desc">We elevate your special moments into extraordinary luxury experiences. From grand corporate galas to intimate destination weddings.</p>
+        
+        <div class="hero-btns">
+          <a href="404.html" class="btn btn-primary">
+            Book an Event <i class="ph ph-arrow-right"></i>
+          </a>
+          <a href="404.html" class="btn btn-outline">
+            Explore Services
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="scroll-indicator">
+      <div class="mouse"></div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="section bg-light">
+    <div class="container">
+      <div class="section-header gs-reveal">
+        <span class="badge">Our Expertise</span>
+        <h2 class="title">Premium <span class="text-orange">Services</span></h2>
+        <p class="subtitle">Flawless execution for every type of celebration</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card gs-reveal">
+          <div class="service-icon"><i class="ph ph-rings"></i></div>
+          <h3>Wedding Planning</h3>
+          <p>End-to-end luxury wedding curation, from venue selection to honeymoon booking.</p>
+          <a href="404.html" class="btn btn-outline btn-sm">Learn More</a>
+        </div>
+        
+        <div class="service-card gs-reveal">
+          <div class="service-icon"><i class="ph ph-buildings"></i></div>
+          <h3>Corporate Events</h3>
+          <p>Professional galas, product launches, and conferences that elevate your brand.</p>
+          <a href="404.html" class="btn btn-outline btn-sm">Learn More</a>
+        </div>
+
+        <div class="service-card gs-reveal">
+          <div class="service-icon"><i class="ph ph-music-notes"></i></div>
+          <h3>Concerts & DJ Nights</h3>
+          <p>High-energy entertainment with world-class sound, lighting, and stage design.</p>
+          <a href="404.html" class="btn btn-outline btn-sm">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Events Section -->
+  <section id="events" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge">Trending Now</span>
+        <h2 class="title">Featured <span class="text-orange">Events</span></h2>
+        <p class="subtitle">Secure your spot at the most exclusive upcoming gatherings</p>
+      </div>
+
+      <div class="events-grid">
+        <!-- Event 1 -->
+        <div class="event-card gs-reveal">
+          <div class="event-img-wrap">
+            <img src="images/gallery-2.webp" alt="Tech Conference">
+            <div class="event-date">
+              15<span>Oct</span>
+            </div>
+            <div class="event-category">Conference</div>
+          </div>
+          <div class="event-content">
+            <h3 class="event-title">Global Tech Summit 2026</h3>
+            <div class="event-meta">
+              <div><i class="ph-fill ph-clock"></i> 09:00 AM</div>
+              <div><i class="ph-fill ph-map-pin"></i> Silicon Valley, CA</div>
+            </div>
+            <div class="event-footer">
+              <div class="event-price">$299</div>
+              <a href="404.html" class="btn btn-primary btn-sm">Book Now</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event 2 -->
+        <div class="event-card gs-reveal">
+          <div class="event-img-wrap">
+            <img src="images/gallery-3.webp" alt="Wedding">
+            <div class="event-date">
+              22<span>Nov</span>
+            </div>
+            <div class="event-category">Wedding Expo</div>
+          </div>
+          <div class="event-content">
+            <h3 class="event-title">Luxury Bridal Showcase</h3>
+            <div class="event-meta">
+              <div><i class="ph-fill ph-clock"></i> 11:00 AM</div>
+              <div><i class="ph-fill ph-map-pin"></i> The Plaza, NY</div>
+            </div>
+            <div class="event-footer">
+              <div class="event-price">Free</div>
+              <a href="404.html" class="btn btn-primary btn-sm">Register</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Signature Moments Gallery -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="section-header gs-reveal">
+        <span class="badge">Our Portfolio</span>
+        <h2 class="title">Signature <span class="text-orange">Moments</span></h2>
+        <p class="subtitle">A glimpse into the experiences we've crafted</p>
+      </div>
+
+      <div class="showcase-gallery gs-reveal">
+        <div class="showcase-item wide tall" data-lightbox="home-gallery" data-caption="Global Tech Summit — Silicon Valley">
+          <img src="images/gallery-2.webp" alt="Tech conference stage">
+          <div class="zoom-icon"><i class="ph ph-magnifying-glass-plus"></i></div>
+          <div class="showcase-caption"><h4>Global Tech Summit</h4><span>Corporate Conference</span></div>
+        </div>
+        <div class="showcase-item" data-lightbox="home-gallery" data-caption="Luxury Bridal Showcase — The Plaza, NY">
+          <img src="images/gallery-3.webp" alt="Wedding reception">
+          <div class="zoom-icon"><i class="ph ph-magnifying-glass-plus"></i></div>
+          <div class="showcase-caption"><h4>Bridal Showcase</h4><span>Wedding</span></div>
+        </div>
+        <div class="showcase-item" data-lightbox="home-gallery" data-caption="Live concert lighting design">
+          <img src="images/gallery-4.webp" alt="Concert lights">
+          <div class="zoom-icon"><i class="ph ph-magnifying-glass-plus"></i></div>
+          <div class="showcase-caption"><h4>Neon Nights</h4><span>Concert</span></div>
+        </div>
+        <div class="showcase-item" data-lightbox="home-gallery" data-caption="Gala table styling and florals">
+          <img src="images/gallery-1.webp" alt="Gala table setting">
+          <div class="zoom-icon"><i class="ph ph-magnifying-glass-plus"></i></div>
+          <div class="showcase-caption"><h4>Gala Styling</h4><span>Decor</span></div>
+        </div>
+        <div class="showcase-item" data-lightbox="home-gallery" data-caption="Exclusive VIP dining experience">
+          <img src="images/gallery-5.webp" alt="VIP dining">
+          <div class="zoom-icon"><i class="ph ph-magnifying-glass-plus"></i></div>
+          <div class="showcase-caption"><h4>VIP Dining</h4><span>Private Experience</span></div>
+        </div>
+        <div class="showcase-item wide" data-lightbox="home-gallery" data-caption="Product launch stage design">
+          <img src="images/gallery-2.webp" alt="Product launch event">
+          <div class="zoom-icon"><i class="ph ph-magnifying-glass-plus"></i></div>
+          <div class="showcase-caption"><h4>Product Launch</h4><span>Brand Event</span></div>
+        </div>
+        <div class="showcase-item" data-lightbox="home-gallery" data-caption="Rooftop celebration lighting">
+          <img src="images/gallery-3.webp" alt="Rooftop event">
+          <div class="zoom-icon"><i class="ph ph-magnifying-glass-plus"></i></div>
+          <div class="showcase-caption"><h4>Rooftop Soirée</h4><span>Private Party</span></div>
+        </div>
+        <div class="showcase-item" data-lightbox="home-gallery" data-caption="Corporate retreat and team building">
+          <img src="images/gallery-4.webp" alt="Corporate retreat">
+          <div class="zoom-icon"><i class="ph ph-magnifying-glass-plus"></i></div>
+          <div class="showcase-caption"><h4>Team Retreat</h4><span>Corporate</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Event Planning Process -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header gs-reveal">
+        <span class="badge">How It Works</span>
+        <h2 class="title">Our <span class="text-orange">Process</span></h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px,100%), 1fr)); gap: 30px; text-align: center;">
+        <div class="gs-reveal">
+          <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent); color: var(--primary); font-size: 2rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">1</div>
+          <h3>Consultation</h3>
+          <p class="text-light">We listen to your vision and requirements.</p>
+        </div>
+        <div class="gs-reveal">
+          <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent); color: var(--primary); font-size: 2rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">2</div>
+          <h3>Concept Design</h3>
+          <p class="text-light">Our experts craft a bespoke event blueprint.</p>
+        </div>
+        <div class="gs-reveal">
+          <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent); color: var(--primary); font-size: 2rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">3</div>
+          <h3>Execution</h3>
+          <p class="text-light">Flawless management on the day of the event.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Animated Counters -->
+  <section class="section bg-light">
+    <div class="container">
+      <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 40px; text-align: center;" class="gs-reveal counter-section-inner">
+        <div>
+          <div class="counter text-orange" data-target="500" style="font-size: 3rem; font-weight: 800;">0</div>
+          <div style="font-weight: 600;">Events Hosted</div>
+        </div>
+        <div>
+          <div class="counter text-orange" data-target="15000" style="font-size: 3rem; font-weight: 800;">0</div>
+          <div style="font-weight: 600;">Happy Guests</div>
+        </div>
+        <div>
+          <div class="counter text-orange" data-target="50" style="font-size: 3rem; font-weight: 800;">0</div>
+          <div style="font-weight: 600;">Awards Won</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials & Brands -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header gs-reveal">
+        <span class="badge">Testimonials</span>
+        <h2 class="title">What Clients <span class="text-orange">Say</span></h2>
+      </div>
+      <div class="testimonial-grid">
+        <div class="testimonial-card gs-reveal">
+          <div class="testimonial-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div>
+          <div class="quote-icon"><i class="ph-fill ph-quotes"></i></div>
+          <p>Stackly turned our corporate gala into a mesmerizing experience. The attention to detail was flawless!</p>
+          <div class="testimonial-author">
+            <img src="images/avatar-1.webp" alt="Jane Doe">
+            <div>
+              <h4>Jane Doe</h4>
+              <span>CEO, TechCorp</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card gs-reveal">
+          <div class="testimonial-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div>
+          <div class="quote-icon"><i class="ph-fill ph-quotes"></i></div>
+          <p>From the floral arch to the final dance, every second of our wedding felt like a dream. Thank you, Stackly!</p>
+          <div class="testimonial-author">
+            <img src="images/avatar-2.webp" alt="Michael Reyes">
+            <div>
+              <h4>Michael Reyes</h4>
+              <span>Newlywed Client</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card gs-reveal">
+          <div class="testimonial-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div>
+          <div class="quote-icon"><i class="ph-fill ph-quotes"></i></div>
+          <p>Our product launch sold out the venue. The stage design and lighting were beyond anything we imagined.</p>
+          <div class="testimonial-author">
+            <img src="images/avatar-3.webp" alt="Aisha Khan">
+            <div>
+              <h4>Aisha Khan</h4>
+              <span>Marketing Director, Nova</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Brands Marquee -->
+      <div class="brand-marquee-wrap gs-reveal">
+        <div class="brand-marquee-track">
+          <span><i class="ph-fill ph-google-logo"></i> Google</span>
+          <span><i class="ph-fill ph-microsoft-outlook-logo"></i> Microsoft</span>
+          <span><i class="ph-fill ph-amazon-logo"></i> Amazon</span>
+          <span><i class="ph-fill ph-spotify-logo"></i> Spotify</span>
+          <span><i class="ph-fill ph-airbnb-logo"></i> Airbnb</span>
+          <span><i class="ph-fill ph-slack-logo"></i> Slack</span>
+          <span><i class="ph-fill ph-google-logo"></i> Google</span>
+          <span><i class="ph-fill ph-microsoft-outlook-logo"></i> Microsoft</span>
+          <span><i class="ph-fill ph-amazon-logo"></i> Amazon</span>
+          <span><i class="ph-fill ph-spotify-logo"></i> Spotify</span>
+          <span><i class="ph-fill ph-airbnb-logo"></i> Airbnb</span>
+          <span><i class="ph-fill ph-slack-logo"></i> Slack</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Accordion -->
+  <section class="section bg-light">
+    <div class="container" style="max-width: 800px;">
+      <div class="section-header gs-reveal">
+        <span class="badge">FAQ</span>
+        <h2 class="title">Common <span class="text-orange">Questions</span></h2>
+      </div>
+      <div class="accordion">
+        <div class="accordion-item gs-reveal" style="background: white; margin-bottom: 16px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+          <button class="accordion-header" style="width: 100%; text-align: left; padding: 24px; background: none; border: none; font-weight: 600; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: space-between;">
+            How far in advance should I book? <i class="ph ph-caret-down"></i>
+          </button>
+          <div class="accordion-body" style="padding: 0 24px 24px; display: none; color: #666;">
+            We recommend booking at least 3-6 months in advance for corporate events and 9-12 months for weddings.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer & Newsletter -->
+  <!-- Premium Footer -->
+  <footer class="premium-footer">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <!-- Company Info -->
+        <div class="footer-widget">
+          <a href="index.html" class="logo" style="color: white; margin-bottom: 24px; display: inline-block; text-decoration: none;">
+            <img src="stackly%20logo.webp" alt="Stackly" style="height: 40px; object-fit: contain;">
+          </a>
+          <p class="footer-text">Architecting unforgettable luxury experiences for the world's most discerning clientele. Your vision, flawlessly executed.</p>
+          <div class="social-icons">
+            <a href="404.html"><i class="ph-fill ph-facebook-logo"></i></a>
+            <a href="404.html"><i class="ph-fill ph-instagram-logo"></i></a>
+            <a href="404.html"><i class="ph-fill ph-twitter-logo"></i></a>
+            <a href="404.html"><i class="ph-fill ph-linkedin-logo"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-widget">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="about.html"><i class="ph ph-caret-right"></i> About Our Journey</a></li>
+            <li><a href="services.html"><i class="ph ph-caret-right"></i> Event Services</a></li>
+            <li><a href="events.html"><i class="ph ph-caret-right"></i> Upcoming Events</a></li>
+            <li><a href="booking.html"><i class="ph ph-caret-right"></i> Secure Your Date</a></li>
+            <li><a href="login.html"><i class="ph ph-caret-right"></i> Client Portal</a></li>
+          </ul>
+        </div>
+
+        <!-- Latest Events Gallery -->
+        <div class="footer-widget">
+          <h4>Event Gallery</h4>
+          <div class="footer-gallery">
+            <img src="images/gallery-1.webp" alt="Gallery">
+            <img src="images/gallery-2.webp" alt="Gallery">
+            <img src="images/gallery-3.webp" alt="Gallery">
+            <img src="images/gallery-4.webp" alt="Gallery">
+            <img src="images/gallery-5.webp" alt="Gallery">
+            <img src="images/gallery-1.webp" alt="Gallery">
+          </div>
+        </div>
+
+        <!-- Contact & Newsletter -->
+        <div class="footer-widget">
+          <h4>Get In Touch</h4>
+          <ul class="footer-contact" style="list-style: none; padding: 0; margin: 0 0 24px 0;">
+            <li><i class="ph-fill ph-map-pin"></i> MMR Complex, Salem, Tamil Nadu</li>
+            <li><i class="ph-fill ph-phone-call"></i> +91 6346437536</li>
+            <li><i class="ph-fill ph-envelope"></i> hello@stackly.in</li>
+          </ul>
+          <h4>Newsletter</h4>
+          <div class="newsletter-box">
+            <input type="email" placeholder="Email Address">
+            <button type="button"><i class="ph ph-paper-plane-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Google Map iframe -->
+      <div style="margin-bottom: 40px; border-radius: var(--radius-md); overflow: hidden; opacity: 0.8; filter: grayscale(100%); transition: 0.3s; cursor: pointer;" onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.8'">
+        <iframe src="https://www.google.com/maps?q=MMR+Complex,+Salem,+Tamil+Nadu&output=embed" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Stackly. All rights reserved. Designed for excellence.</div>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+          <a href="#">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top -->
+  <button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <i class="ph ph-arrow-up"></i>
+  </button>
+
+  <script>
+    // Scroll to Top Logic
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    if(scrollBtn) {
+      window.addEventListener('scroll', () => {
+        if(window.scrollY > 500) {
+          scrollBtn.classList.add('visible');
+        } else {
+          scrollBtn.classList.remove('visible');
+        }
+      });
+    }
+  </script>
+
+
+  <!-- External Scripts -->
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  
+  <!-- Custom Script -->
+  <script src="js/script.js"></script>
+</body>
+</html>

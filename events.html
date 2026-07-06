@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Events - Stackly</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Events Hero */
+    .events-hero {
+      padding: 200px 0 90px;
+      background: linear-gradient(135deg, rgba(10, 8, 6, 0.75) 0%, rgba(30, 16, 4, 0.6) 100%), url('images/gallery-1.webp') center/cover no-repeat;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+    .events-hero .subtitle { color: rgba(255,255,255,0.85); }
+
+    /* Hero Search Bar */
+    .hero-search {
+      max-width: 560px;
+      margin: 32px auto 0;
+      display: flex;
+      background: white;
+      border-radius: var(--radius-full);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      padding: 6px;
+    }
+    .hero-search input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 12px 20px;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+    .hero-search button {
+      border: none;
+      background: var(--primary);
+      color: white;
+      padding: 0 28px;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+    .hero-search button:hover { background: var(--secondary); }
+
+    /* Stats Overlay */
+    .stats-overlay {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: -55px;
+      margin-bottom: 50px;
+      position: relative;
+      z-index: 10;
+      flex-wrap: wrap;
+    }
+    .stat-box {
+      background: var(--bg-color);
+      padding: 26px 30px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+      border-bottom: 4px solid var(--primary);
+      min-width: 170px;
+    }
+    .stat-box .stat-number { font-size: 2.25rem; font-weight: 800; color: var(--primary); }
+    .stat-box div:last-child { font-size: 0.85rem; color: var(--text-light); font-weight: 500; }
+
+    /* Spotlight Banner */
+    .spotlight-banner {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      background: linear-gradient(120deg, var(--text-dark) 0%, #3a2a1a 100%);
+      color: white;
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+      margin-bottom: 50px;
+      flex-wrap: wrap;
+    }
+    .spotlight-banner img {
+      width: 84px;
+      height: 84px;
+      border-radius: var(--radius-md);
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .spotlight-banner .spotlight-info { flex: 1; min-width: 220px; }
+    .spotlight-banner .spotlight-label {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.75rem;
+      color: var(--secondary);
+      font-weight: 700;
+    }
+
+    /* Category Strip */
+    .category-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+    .category-chip {
+      text-align: center;
+      padding: 24px 12px;
+      background: white;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .category-chip:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+    .category-chip i { font-size: 1.75rem; color: var(--primary); margin-bottom: 10px; display: block; }
+    .category-chip span { font-weight: 600; font-size: 0.9rem; }
+
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 50px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 8px 20px;
+      border: 1px solid #eee;
+      border-radius: var(--radius-full);
+      background: white;
+      cursor: pointer;
+      font-weight: 500;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      box-shadow: var(--shadow-orange);
+    }
+
+    /* Enhanced Event Card */
+    .event-card {
+      display: flex;
+      flex-direction: column;
+    }
+    .event-meta-extended {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      font-size: 0.875rem;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+    .event-meta-extended div {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .event-meta-extended i { color: var(--primary); }
+    
+    .countdown-timer {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 8px;
+      border-radius: var(--radius-md);
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.875rem;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar scrolled">
+    <div class="container nav-container">
+      <a href="index.html" class="logo"><img src="stackly%20logo.webp" alt="Stackly" style="height: 40px; object-fit: contain;"></a>
+      <ul class="nav-links">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+        <li class="nav-item"><a href="events.html" class="nav-link active">Events</a></li>
+        <li class="nav-item"><a href="booking.html" class="nav-link">Booking</a></li>
+        <li class="nav-item"><a href="login.html" class="nav-link">Login</a></li>
+      </ul>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <header class="events-hero">
+    <div class="container gs-reveal">
+      <span class="hero-badge"><i class="ph ph-calendar-check"></i> 500+ Unforgettable Nights</span>
+      <h1 class="title">Find Your Next <span class="text-orange">Experience</span></h1>
+      <p class="subtitle">Find and secure your spot at the world's most exclusive gatherings.</p>
+      <div class="hero-search">
+        <input type="text" id="eventSearch" placeholder="Search by event name, city, or type...">
+        <button onclick="document.querySelectorAll('.filter-btn')[0].click()"><i class="ph ph-magnifying-glass"></i> Search</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="stats-overlay gs-reveal">
+      <div class="stat-box">
+        <div class="counter stat-number" data-target="82">0</div>
+        <div>Events This Year</div>
+      </div>
+      <div class="stat-box">
+        <div class="counter stat-number" data-target="18">0</div>
+        <div>Cities Covered</div>
+      </div>
+      <div class="stat-box">
+        <div class="counter stat-number" data-target="15000">0</div>
+        <div>Guests Hosted</div>
+      </div>
+      <div class="stat-box">
+        <div style="font-size: 2.25rem; font-weight: 800; color: var(--primary);">4.9<span style="font-size:1.1rem;">/5</span></div>
+        <div>Average Rating</div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section pt-0 bg-light">
+    <div class="container">
+
+      <!-- Spotlight -->
+      <div class="spotlight-banner gs-reveal">
+        <img src="images/gallery-2.webp" alt="Global Tech Summit spotlight">
+        <div class="spotlight-info">
+          <div class="spotlight-label"><i class="ph-fill ph-star"></i> Selling Fast — Next Up</div>
+          <h3 style="margin: 4px 0;">Global Tech Summit 2026</h3>
+          <p style="color: #ccc; margin: 0; font-size: 0.9rem;">Oct 15 &middot; Moscone Center, CA &middot; Starts in 12d 08h</p>
+        </div>
+        <a href="404.html" class="btn btn-primary">Reserve a Seat <i class="ph ph-arrow-right"></i></a>
+      </div>
+
+      <!-- Category Strip -->
+      <div class="category-strip gs-reveal">
+        <div class="category-chip"><i class="ph-fill ph-rings"></i><span>Weddings</span></div>
+        <div class="category-chip"><i class="ph-fill ph-buildings"></i><span>Corporate</span></div>
+        <div class="category-chip"><i class="ph-fill ph-music-notes"></i><span>Music</span></div>
+        <div class="category-chip"><i class="ph-fill ph-cake"></i><span>Birthday</span></div>
+        <div class="category-chip"><i class="ph-fill ph-lantern"></i><span>Cultural</span></div>
+      </div>
+
+      <div class="section-header gs-reveal">
+        <span class="badge">All Gatherings</span>
+        <h2 class="title">Browse <span class="text-orange">Upcoming Events</span></h2>
+        <p class="subtitle">Filter by type or status to find exactly what you're looking for.</p>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters gs-reveal">
+        <button class="filter-btn active">All</button>
+        <button class="filter-btn">Upcoming</button>
+        <button class="filter-btn">Ongoing</button>
+        <button class="filter-btn">Completed</button>
+        <button class="filter-btn">Wedding</button>
+        <button class="filter-btn">Corporate</button>
+        <button class="filter-btn">Birthday</button>
+        <button class="filter-btn">Music</button>
+        <button class="filter-btn">Cultural</button>
+      </div>
+      
+      <div class="events-grid">
+        
+        <!-- Event Card 1 -->
+        <div class="event-card gs-reveal">
+          <div class="event-img-wrap">
+            <img src="images/gallery-2.webp" alt="Tech Conference">
+            <div class="event-date">15<span>Oct</span></div>
+            <div class="event-category" style="background: var(--warning);">Upcoming</div>
+          </div>
+          <div class="event-content">
+            <h3 class="event-title">Global Tech Summit 2026</h3>
+            
+            <div class="countdown-timer">Starts in: 12d 08h 45m</div>
+            
+            <div class="event-meta-extended">
+              <div><i class="ph-fill ph-map-pin"></i> Moscone Center, CA</div>
+              <div><i class="ph-fill ph-clock"></i> 09:00 AM - 05:00 PM</div>
+              <div><i class="ph-fill ph-users"></i> 5,000+ Attendees</div>
+              <div><i class="ph-fill ph-star"></i> 4.9/5 (120 Ratings)</div>
+              <div style="grid-column: span 2;"><i class="ph-fill ph-user-circle"></i> Organizer: TechCorp Global</div>
+            </div>
+
+            <div class="event-footer">
+              <div class="event-price">$299</div>
+              <a href="404.html" class="btn btn-primary btn-sm">Book Now</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event Card 2 -->
+        <div class="event-card gs-reveal">
+          <div class="event-img-wrap">
+            <img src="images/gallery-3.webp" alt="Wedding">
+            <div class="event-date">22<span>Nov</span></div>
+            <div class="event-category" style="background: var(--primary);">Wedding</div>
+          </div>
+          <div class="event-content">
+            <h3 class="event-title">Luxury Bridal Showcase</h3>
+            
+            <div class="countdown-timer">Starts in: 45d 12h 30m</div>
+            
+            <div class="event-meta-extended">
+              <div><i class="ph-fill ph-map-pin"></i> The Plaza, New York</div>
+              <div><i class="ph-fill ph-clock"></i> 11:00 AM - 04:00 PM</div>
+              <div><i class="ph-fill ph-users"></i> 800+ Attendees</div>
+              <div><i class="ph-fill ph-star"></i> 5.0/5 (45 Ratings)</div>
+              <div style="grid-column: span 2;"><i class="ph-fill ph-user-circle"></i> Organizer: Aura Weddings</div>
+            </div>
+
+            <div class="event-footer">
+              <div class="event-price">Free</div>
+              <a href="404.html" class="btn btn-primary btn-sm">Register</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Event Card 3 -->
+        <div class="event-card gs-reveal">
+          <div class="event-img-wrap">
+            <img src="images/gallery-4.webp" alt="Concert">
+            <div class="event-date">05<span>Dec</span></div>
+            <div class="event-category" style="background: var(--success);">Music</div>
+          </div>
+          <div class="event-content">
+            <h3 class="event-title">Symphony Under the Stars</h3>
+            
+            <div class="countdown-timer">Starts in: 60d 18h 15m</div>
+            
+            <div class="event-meta-extended">
+              <div><i class="ph-fill ph-map-pin"></i> Central Park, NY</div>
+              <div><i class="ph-fill ph-clock"></i> 07:00 PM - 11:00 PM</div>
+              <div><i class="ph-fill ph-users"></i> 10,000+ Attendees</div>
+              <div><i class="ph-fill ph-star"></i> 4.8/5 (340 Ratings)</div>
+              <div style="grid-column: span 2;"><i class="ph-fill ph-user-circle"></i> Organizer: NY Arts Foundation</div>
+            </div>
+
+            <div class="event-footer">
+              <div class="event-price">$85</div>
+              <a href="404.html" class="btn btn-primary btn-sm">Book Now</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event Card 4 -->
+        <div class="event-card gs-reveal">
+          <div class="event-img-wrap">
+            <img src="images/gallery-2.webp" alt="Birthday celebration">
+            <div class="event-date">02<span>Jan</span></div>
+            <div class="event-category" style="background: #C084FC;">Birthday</div>
+          </div>
+          <div class="event-content">
+            <h3 class="event-title">Golden Hour Birthday Bash</h3>
+            <div class="countdown-timer">Starts in: 90d 04h 00m</div>
+            <div class="event-meta-extended">
+              <div><i class="ph-fill ph-map-pin"></i> Rosewood Terrace, LA</div>
+              <div><i class="ph-fill ph-clock"></i> 06:00 PM - 10:00 PM</div>
+              <div><i class="ph-fill ph-users"></i> 150+ Attendees</div>
+              <div><i class="ph-fill ph-star"></i> 4.7/5 (30 Ratings)</div>
+              <div style="grid-column: span 2;"><i class="ph-fill ph-user-circle"></i> Organizer: Stackly Private Events</div>
+            </div>
+            <div class="event-footer">
+              <div class="event-price">$120</div>
+              <a href="404.html" class="btn btn-primary btn-sm">Book Now</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event Card 5 -->
+        <div class="event-card gs-reveal">
+          <div class="event-img-wrap">
+            <img src="images/gallery-3.webp" alt="Cultural festival">
+            <div class="event-date">14<span>Feb</span></div>
+            <div class="event-category" style="background: #38BDF8;">Cultural</div>
+          </div>
+          <div class="event-content">
+            <h3 class="event-title">Lantern Festival of Lights</h3>
+            <div class="countdown-timer">Starts in: 130d 10h 00m</div>
+            <div class="event-meta-extended">
+              <div><i class="ph-fill ph-map-pin"></i> Riverside Gardens, TX</div>
+              <div><i class="ph-fill ph-clock"></i> 05:00 PM - 09:00 PM</div>
+              <div><i class="ph-fill ph-users"></i> 3,000+ Attendees</div>
+              <div><i class="ph-fill ph-star"></i> 4.9/5 (210 Ratings)</div>
+              <div style="grid-column: span 2;"><i class="ph-fill ph-user-circle"></i> Organizer: Riverside Cultural Trust</div>
+            </div>
+            <div class="event-footer">
+              <div class="event-price">$45</div>
+              <a href="404.html" class="btn btn-primary btn-sm">Book Now</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event Card 6 -->
+        <div class="event-card gs-reveal">
+          <div class="event-img-wrap">
+            <img src="images/gallery-1.webp" alt="Corporate networking">
+            <div class="event-date">28<span>Feb</span></div>
+            <div class="event-category" style="background: var(--warning);">Corporate</div>
+          </div>
+          <div class="event-content">
+            <h3 class="event-title">Founders & Innovators Mixer</h3>
+            <div class="countdown-timer">Starts in: 144d 06h 20m</div>
+            <div class="event-meta-extended">
+              <div><i class="ph-fill ph-map-pin"></i> Hyatt Regency, Chicago</div>
+              <div><i class="ph-fill ph-clock"></i> 06:30 PM - 09:30 PM</div>
+              <div><i class="ph-fill ph-users"></i> 400+ Attendees</div>
+              <div><i class="ph-fill ph-star"></i> 4.6/5 (58 Ratings)</div>
+              <div style="grid-column: span 2;"><i class="ph-fill ph-user-circle"></i> Organizer: Stackly Business Network</div>
+            </div>
+            <div class="event-footer">
+              <div class="event-price">$60</div>
+              <a href="404.html" class="btn btn-primary btn-sm">Book Now</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Guest Testimonials -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header gs-reveal">
+        <span class="badge">Guest Reviews</span>
+        <h2 class="title">What <span class="text-orange">Attendees</span> Say</h2>
+      </div>
+      <div class="testimonial-grid">
+        <div class="testimonial-card gs-reveal">
+          <div class="testimonial-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div>
+          <p>"The Lantern Festival felt like stepping into another world. Every detail, from the lighting to the flow of the crowd, was flawless."</p>
+          <div class="testimonial-author">
+            <img src="images/avatar-1.webp" alt="Attendee">
+            <div><h4>Priya Menon</h4><span>Lantern Festival Guest</span></div>
+          </div>
+        </div>
+        <div class="testimonial-card gs-reveal">
+          <div class="testimonial-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div>
+          <p>"Registration to seating was effortless. The countdown reminders meant I never missed a session at the Tech Summit."</p>
+          <div class="testimonial-author">
+            <img src="images/avatar-2.webp" alt="Attendee">
+            <div><h4>Arjun Rao</h4><span>Global Tech Summit Attendee</span></div>
+          </div>
+        </div>
+        <div class="testimonial-card gs-reveal">
+          <div class="testimonial-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div>
+          <p>"We booked the Founders & Innovators Mixer to grow our network and left with three new partnerships. Impeccably run."</p>
+          <div class="testimonial-author">
+            <img src="images/avatar-3.webp" alt="Attendee">
+            <div><h4>Kevin D'Souza</h4><span>Founders & Innovators Mixer</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <!-- Premium Footer -->
+  <footer class="premium-footer">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <!-- Company Info -->
+        <div class="footer-widget">
+          <a href="index.html" class="logo" style="color: white; margin-bottom: 24px; display: inline-block; text-decoration: none;">
+            <img src="stackly%20logo.webp" alt="Stackly" style="height: 40px; object-fit: contain;">
+          </a>
+          <p class="footer-text">Architecting unforgettable luxury experiences for the world's most discerning clientele. Your vision, flawlessly executed.</p>
+          <div class="social-icons">
+            <a href="404.html"><i class="ph-fill ph-facebook-logo"></i></a>
+            <a href="404.html"><i class="ph-fill ph-instagram-logo"></i></a>
+            <a href="404.html"><i class="ph-fill ph-twitter-logo"></i></a>
+            <a href="404.html"><i class="ph-fill ph-linkedin-logo"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-widget">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="about.html"><i class="ph ph-caret-right"></i> About Our Journey</a></li>
+            <li><a href="services.html"><i class="ph ph-caret-right"></i> Event Services</a></li>
+            <li><a href="events.html"><i class="ph ph-caret-right"></i> Upcoming Events</a></li>
+            <li><a href="booking.html"><i class="ph ph-caret-right"></i> Secure Your Date</a></li>
+            <li><a href="login.html"><i class="ph ph-caret-right"></i> Client Portal</a></li>
+          </ul>
+        </div>
+
+        <!-- Latest Events Gallery -->
+        <div class="footer-widget">
+          <h4>Event Gallery</h4>
+          <div class="footer-gallery">
+            <img src="images/gallery-1.webp" alt="Gallery">
+            <img src="images/gallery-2.webp" alt="Gallery">
+            <img src="images/gallery-3.webp" alt="Gallery">
+            <img src="images/gallery-4.webp" alt="Gallery">
+            <img src="images/gallery-5.webp" alt="Gallery">
+            <img src="images/gallery-1.webp" alt="Gallery">
+          </div>
+        </div>
+
+        <!-- Contact & Newsletter -->
+        <div class="footer-widget">
+          <h4>Get In Touch</h4>
+          <ul class="footer-contact" style="list-style: none; padding: 0; margin: 0 0 24px 0;">
+            <li><i class="ph-fill ph-map-pin"></i> MMR Complex, Salem, Tamil Nadu</li>
+            <li><i class="ph-fill ph-phone-call"></i> +91 6346437536</li>
+            <li><i class="ph-fill ph-envelope"></i> hello@stackly.in</li>
+          </ul>
+          <h4>Newsletter</h4>
+          <div class="newsletter-box">
+            <input type="email" placeholder="Email Address">
+            <button type="button"><i class="ph ph-paper-plane-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Google Map iframe -->
+      <div style="margin-bottom: 40px; border-radius: var(--radius-md); overflow: hidden; opacity: 0.8; filter: grayscale(100%); transition: 0.3s; cursor: pointer;" onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.8'">
+        <iframe src="https://www.google.com/maps?q=MMR+Complex,+Salem,+Tamil+Nadu&output=embed" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Stackly. All rights reserved. Designed for excellence.</div>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+          <a href="#">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top -->
+  <button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <i class="ph ph-arrow-up"></i>
+  </button>
+
+  <script>
+    // Scroll to Top Logic
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    if(scrollBtn) {
+      window.addEventListener('scroll', () => {
+        if(window.scrollY > 500) {
+          scrollBtn.classList.add('visible');
+        } else {
+          scrollBtn.classList.remove('visible');
+        }
+      });
+    }
+
+    // Live Event Search
+    const eventSearch = document.getElementById('eventSearch');
+    if (eventSearch) {
+      eventSearch.addEventListener('input', () => {
+        const query = eventSearch.value.trim().toLowerCase();
+        document.querySelectorAll('.event-card').forEach(card => {
+          const text = card.innerText.toLowerCase();
+          card.style.display = text.includes(query) ? '' : 'none';
+        });
+      });
+    }
+  </script>
+
+
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

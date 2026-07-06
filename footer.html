@@ -1,0 +1,94 @@
+<!-- Premium Footer -->
+  <footer class="premium-footer">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <!-- Company Info -->
+        <div class="footer-widget">
+          <a href="index.html" class="logo" style="color: white; margin-bottom: 24px; display: inline-block; text-decoration: none;">
+            <img src="stackly%20logo.webp" alt="Stackly" style="height: 40px; object-fit: contain;">
+          </a>
+          <p class="footer-text">Architecting unforgettable luxury experiences for the world's most discerning clientele. Your vision, flawlessly executed.</p>
+          <div class="social-icons">
+            <a href="404.html"><i class="ph-fill ph-facebook-logo"></i></a>
+            <a href="404.html"><i class="ph-fill ph-instagram-logo"></i></a>
+            <a href="404.html"><i class="ph-fill ph-twitter-logo"></i></a>
+            <a href="404.html"><i class="ph-fill ph-linkedin-logo"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-widget">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="about.html"><i class="ph ph-caret-right"></i> About Our Journey</a></li>
+            <li><a href="services.html"><i class="ph ph-caret-right"></i> Event Services</a></li>
+            <li><a href="events.html"><i class="ph ph-caret-right"></i> Upcoming Events</a></li>
+            <li><a href="booking.html"><i class="ph ph-caret-right"></i> Secure Your Date</a></li>
+            <li><a href="login.html"><i class="ph ph-caret-right"></i> Client Portal</a></li>
+          </ul>
+        </div>
+
+        <!-- Latest Events Gallery -->
+        <div class="footer-widget">
+          <h4>Event Gallery</h4>
+          <div class="footer-gallery">
+            <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=200&q=80" alt="Gallery">
+            <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=200&q=80" alt="Gallery">
+            <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=200&q=80" alt="Gallery">
+            <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=200&q=80" alt="Gallery">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=200&q=80" alt="Gallery">
+            <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=200&q=80" alt="Gallery">
+          </div>
+        </div>
+
+        <!-- Contact & Newsletter -->
+        <div class="footer-widget">
+          <h4>Get In Touch</h4>
+          <ul class="footer-contact" style="list-style: none; padding: 0; margin: 0 0 24px 0;">
+            <li><i class="ph-fill ph-map-pin"></i> MMR Complex, Salem, Tamil Nadu</li>
+            <li><i class="ph-fill ph-phone-call"></i> +91 6346437536</li>
+            <li><i class="ph-fill ph-envelope"></i> hello@stackly.in</li>
+          </ul>
+          <h4>Newsletter</h4>
+          <div class="newsletter-box">
+            <input type="email" placeholder="Email Address">
+            <button type="button" onclick="window.location.href='404.html'"><i class="ph ph-paper-plane-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Google Map iframe -->
+      <div style="margin-bottom: 40px; border-radius: var(--radius-md); overflow: hidden; opacity: 0.8; filter: grayscale(100%); transition: 0.3s; cursor: pointer;" onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.8'">
+        <iframe src="https://www.google.com/maps?q=MMR+Complex,+Salem,+Tamil+Nadu&output=embed" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Stackly. All rights reserved. Designed for excellence.</div>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+          <a href="#">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top -->
+  <button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <i class="ph ph-arrow-up"></i>
+  </button>
+
+  <script>
+    // Scroll to Top Logic
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    if(scrollBtn) {
+      window.addEventListener('scroll', () => {
+        if(window.scrollY > 500) {
+          scrollBtn.classList.add('visible');
+        } else {
+          scrollBtn.classList.remove('visible');
+        }
+      });
+    }
+  </script>

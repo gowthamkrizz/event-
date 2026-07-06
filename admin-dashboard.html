@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Stackly</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <style>
+    /* Reuse base dashboard CSS with slight theme tweaks for Admin */
+    :root {
+      --primary: #FF6B00;
+      --secondary: #FF8C42;
+      --accent: #FFF4EC;
+      --bg-light: #f4f6f8;
+      --bg-color: #ffffff;
+      --text-dark: #1E1E1E;
+      --text-light: #666666;
+      --border: #e0e0e0;
+      --sidebar-width: 260px;
+      --radius-lg: 16px;
+      --radius-md: 8px;
+      --transition: 0.3s ease;
+    }
+    
+    body.dark-theme {
+      --bg-light: #121212;
+      --bg-color: #1e1e1e;
+      --text-dark: #ffffff;
+      --text-light: #aaaaaa;
+      --border: #333333;
+      --accent: #2a1608;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: var(--sidebar-width);
+      background: var(--bg-color);
+      color: var(--text-dark);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+      position: fixed;
+      height: 100vh;
+      z-index: 100;
+    }
+    .sidebar.collapsed { transform: translateX(-100%); }
+    
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(-100%); }
+      .sidebar.active { transform: translateX(0); }
+      .main-content { margin-left: 0 !important; }
+      body.sidebar-open { overflow: hidden; }
+
+      /* Fix Topbar Overlap */
+      .topbar { padding: 0 15px; }
+      .topbar-right { gap: 12px; }
+      #userEmailDisplay { display: none; }
+      .user-profile { gap: 0; }
+      h2 { font-size: 1.1rem !important; }
+      .d-desktop { display: none; }
+      
+      .dashboard-container { padding: 15px; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr; }
+    }
+    .d-mobile { display: none; }
+    @media (max-width: 768px) {
+      .d-mobile { display: flex; }
+    }
+    .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 95; }
+    .mobile-overlay.active { display: block; }
+    
+    .sidebar-header {
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #333;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo span { color: var(--primary); }
+
+    .nav-menu { padding: 20px 12px; flex: 1; overflow-y: auto; }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      color: var(--text-light);
+      text-decoration: none;
+      border-radius: var(--radius-md);
+      margin-bottom: 4px;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+    .nav-item:hover, .nav-item.active {
+      background: var(--accent);
+      color: var(--primary);
+    }
+    .nav-item i { font-size: 1.25rem; color: var(--primary); }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      margin-left: var(--sidebar-width);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Topbar */
+    .topbar {
+      height: 70px;
+      background: var(--bg-color);
+      border-bottom: 1px solid var(--border);
+      width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+      position: sticky;
+      top: 0;
+      z-index: 90;
+    }
+    .topbar-right { display: flex; align-items: center; gap: 20px; }
+    .icon-btn {
+      background: none;
+      border: none;
+      font-size: 1.25rem;
+      color: var(--text-light);
+      cursor: pointer;
+      position: relative;
+    }
+    .user-profile { display: flex; align-items: center; gap: 10px; font-weight: 500; }
+    .user-profile img { width: 40px; height: 40px; border-radius: 50%; }
+
+    /* Dashboard Layout */
+    .dashboard-container { padding: 30px; }
+    
+    /* Stats Cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+    .stat-card {
+      background: var(--bg-color);
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .stat-info h4 { margin: 0 0 8px 0; color: var(--text-light); font-weight: 500; }
+    .stat-info h2 { margin: 0; font-size: 2rem; color: var(--text-dark); }
+    .stat-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--accent);
+      color: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+    }
+
+    /* Content Grids */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    .card {
+      background: var(--bg-color);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .card-header h3 { margin: 0; }
+    .btn-sm {
+      padding: 6px 12px;
+      background: var(--accent);
+      color: var(--primary);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    /* Table */
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); }
+    th { color: var(--text-light); font-weight: 500; font-size: 0.875rem; }
+    .status { padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+    .status.upcoming { background: #E3F2FD; color: #1976D2; }
+    .status.completed { background: #E8F5E9; color: #388E3C; }
+    .status.pending { background: #FFF3E0; color: #F57C00; }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="index.html" class="logo"><img src="stackly%20logo.webp" alt="Stackly Admin" style="height: 40px; object-fit: contain;"></a>
+      <button class="icon-btn d-mobile" id="closeSidebar"><i class="ph ph-x"></i></button>
+    </div>
+    <nav class="nav-menu">
+      <a href="#" class="nav-item active" data-target="tab-overview"><i class="ph ph-squares-four"></i> Overview</a>
+      <a href="#" class="nav-item" data-target="tab-users"><i class="ph ph-users"></i> User Management</a>
+      <a href="#" class="nav-item" data-target="tab-bookings"><i class="ph ph-calendar"></i> Bookings</a>
+      <a href="#" class="nav-item" data-target="tab-events"><i class="ph ph-ticket"></i> Event Management</a>
+      <a href="#" class="nav-item" data-target="tab-revenue"><i class="ph ph-chart-line-up"></i> Revenue Analytics</a>
+      <a href="#" class="nav-item" data-target="tab-reports"><i class="ph ph-file-text"></i> Reports</a>
+      <a href="#" class="nav-item" data-target="tab-roles"><i class="ph ph-shield-check"></i> Role Management</a>
+      <a href="#" class="nav-item" data-target="tab-settings"><i class="ph ph-gear"></i> Settings</a>
+    </nav>
+    <div style="padding: 20px;">
+      <button class="nav-item" style="width: 100%; border: none; cursor: pointer; color: #ff5252; background: rgba(255,0,0,0.1);" onclick="window.location.href='login.html'">
+        <i class="ph ph-sign-out" style="color: #ff5252;"></i> Logout
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content" id="mainContent">
+    
+    <!-- Topbar -->
+    <header class="topbar">
+      <div style="display: flex; align-items: center; gap: 20px;">
+        <button class="icon-btn" id="toggleSidebar"><i class="ph ph-list"></i></button>
+        <h2 style="margin: 0; font-size: 1.25rem;">Command Center</h2>
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn" id="themeToggle"><i class="ph ph-moon"></i></button>
+        <button class="icon-btn"><i class="ph ph-bell"></i></button>
+        <div class="user-profile">
+          <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold;">AD</div>
+          <span id="adminEmailDisplay">Super Admin</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- TAB 1: Overview -->
+    <div id="tab-overview" class="dashboard-container tab-content active">
+      
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-info">
+            <h4>Total Revenue</h4>
+            <h2>$1.2M</h2>
+          </div>
+          <div class="stat-icon"><i class="ph ph-currency-dollar"></i></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-info">
+            <h4>Active Bookings</h4>
+            <h2>142</h2>
+          </div>
+          <div class="stat-icon"><i class="ph ph-calendar-check"></i></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-info">
+            <h4>Total Users</h4>
+            <h2>5,230</h2>
+          </div>
+          <div class="stat-icon"><i class="ph ph-users"></i></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-info">
+            <h4>Pending Requests</h4>
+            <h2>18</h2>
+          </div>
+          <div class="stat-icon" style="background: #FFF3E0; color: #F57C00;"><i class="ph ph-warning-circle"></i></div>
+        </div>
+      </div>
+
+      <!-- Grids -->
+      <div class="grid-2">
+        
+        <!-- Revenue Chart -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Revenue Analytics (2026)</h3>
+            <select style="padding: 6px; border-radius: 4px; border: 1px solid var(--border);"><option>Yearly</option><option>Monthly</option></select>
+          </div>
+          <canvas id="revenueChart" height="250"></canvas>
+        </div>
+
+        <!-- Recent Users -->
+        <div class="card">
+          <div class="card-header">
+            <h3>New Registrations</h3>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <img src="images/avatar-1.webp" style="width: 40px; height: 40px; border-radius: 50%;">
+                <div>
+                  <div style="font-weight: 500;">Jane Doe</div>
+                  <div style="font-size: 0.875rem; color: var(--text-light);">jane@example.com</div>
+                </div>
+              </div>
+              <span style="font-size: 0.75rem; color: var(--text-light);">2 mins ago</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <img src="images/avatar-2.webp" style="width: 40px; height: 40px; border-radius: 50%;">
+                <div>
+                  <div style="font-weight: 500;">Mark Smith</div>
+                  <div style="font-size: 0.875rem; color: var(--text-light);">mark.s@tech.co</div>
+                </div>
+              </div>
+              <span style="font-size: 0.75rem; color: var(--text-light);">1 hr ago</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Recent Bookings Table -->
+      <div class="card">
+        <div class="card-header">
+          <h3>Recent Booking Management</h3>
+          <button class="btn-sm" onclick="window.location.href='404.html'">Manage</button>
+        </div>
+        <div style="overflow-x: auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Booking ID</th>
+                <th>Client Name</th>
+                <th>Event Type</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#BK-10025</td>
+                <td>TechCorp Global</td>
+                <td>Conference</td>
+                <td>Oct 15, 2026</td>
+                <td>$15,000</td>
+                <td><span class="status upcoming">Confirmed</span></td>
+                <td>
+                  <i class="ph ph-pencil-simple" style="cursor: pointer; margin-right: 8px;"></i>
+                  <i class="ph ph-trash" style="cursor: pointer; color: red;"></i>
+                </td>
+              </tr>
+              <tr>
+                <td>#BK-10026</td>
+                <td>Sarah Jenkins</td>
+                <td>Wedding</td>
+                <td>Dec 05, 2026</td>
+                <td>$5,000</td>
+                <td><span class="status pending">Pending</span></td>
+                <td>
+                  <i class="ph ph-pencil-simple" style="cursor: pointer; margin-right: 8px;"></i>
+                  <i class="ph ph-trash" style="cursor: pointer; color: red;"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div> <!-- /TAB 1 -->
+
+    <!-- TAB 2: Users -->
+    <div id="tab-users" class="dashboard-container tab-content">
+      <div class="card" style="margin-bottom: 24px;">
+        <h3>User Management Database</h3>
+        <p style="color: var(--text-light);">Manage, block, or modify user accounts and permissions.</p>
+        <button class="btn-sm" style="background: var(--primary); color: white; margin-top: 10px;" onclick="window.location.href='404.html'">+ Add New User</button>
+      </div>
+      
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <input type="text" placeholder="Search users by name, email, or role..." style="padding: 10px; border-radius: 6px; border: 1px solid var(--border); width: 100%; max-width: 400px;">
+          <select style="padding: 10px; border-radius: 6px; border: 1px solid var(--border);"><option>All Roles</option><option>Admins</option><option>Clients</option></select>
+        </div>
+        <div style="overflow-x: auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>User</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Joined Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div style="display: flex; align-items: center; gap: 10px;"><img src="images/avatar-1.webp" style="width: 32px; height: 32px; border-radius: 50%;"> Jane Doe</div></td>
+                <td>jane@example.com</td>
+                <td>Client</td>
+                <td><span class="status completed">Active</span></td>
+                <td>Aug 10, 2026</td>
+                <td>
+                  <i class="ph ph-pencil-simple" style="cursor: pointer; margin-right: 8px;"></i>
+                  <i class="ph ph-prohibit" style="cursor: pointer; color: #F57C00; margin-right: 8px;"></i>
+                  <i class="ph ph-trash" style="cursor: pointer; color: red;"></i>
+                </td>
+              </tr>
+              <tr>
+                <td><div style="display: flex; align-items: center; gap: 10px;"><img src="images/avatar-2.webp" style="width: 32px; height: 32px; border-radius: 50%;"> Mark Smith</div></td>
+                <td>mark.s@tech.co</td>
+                <td>Admin</td>
+                <td><span class="status completed">Active</span></td>
+                <td>Feb 20, 2026</td>
+                <td>
+                  <i class="ph ph-pencil-simple" style="cursor: pointer; margin-right: 8px;"></i>
+                  <i class="ph ph-prohibit" style="cursor: pointer; color: #F57C00; margin-right: 8px;"></i>
+                  <i class="ph ph-trash" style="cursor: pointer; color: red;"></i>
+                </td>
+              </tr>
+              <tr>
+                <td><div style="display: flex; align-items: center; gap: 10px;"><div style="width: 32px; height: 32px; border-radius: 50%; background: #eee; display: flex; align-items: center; justify-content: center;">AJ</div> Alex Johnson</div></td>
+                <td>alex.j@mail.com</td>
+                <td>Client</td>
+                <td><span class="status" style="background: #ffebee; color: #d32f2f;">Suspended</span></td>
+                <td>Oct 05, 2025</td>
+                <td>
+                  <i class="ph ph-pencil-simple" style="cursor: pointer; margin-right: 8px;"></i>
+                  <i class="ph ph-check-circle" style="cursor: pointer; color: green; margin-right: 8px;"></i>
+                  <i class="ph ph-trash" style="cursor: pointer; color: red;"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: Bookings -->
+    <div id="tab-bookings" class="dashboard-container tab-content">
+      <div class="card">
+        <h3>All Bookings</h3>
+        <p style="color: var(--text-light);">Review all historical and future event bookings across the platform.</p>
+      </div>
+    </div>
+
+    <!-- TAB 4: Events -->
+    <div id="tab-events" class="dashboard-container tab-content">
+      <div class="card" style="margin-bottom: 24px;">
+        <h3>Event Management</h3>
+        <p style="color: var(--text-light);">Create new event packages, modify pricing, and assign venues.</p>
+        <button class="btn-sm" style="background: var(--primary); color: white; margin-top: 10px;" onclick="window.location.href='404.html'">Create Event Package</button>
+      </div>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px;">
+        <div class="card" style="padding: 0; overflow: hidden;">
+          <img src="images/gallery-1.webp" alt="Event" style="width: 100%; height: 200px; object-fit: cover;">
+          <div style="padding: 20px;">
+            <h4 style="margin: 0 0 10px 0;">Luxury Wedding Package</h4>
+            <p style="color: var(--text-light); font-size: 0.875rem;">Premium all-inclusive wedding package with exclusive venue access.</p>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px;">
+              <span style="font-weight: 600; color: var(--primary);">$10,000</span>
+              <div>
+                <i class="ph ph-pencil-simple" style="cursor: pointer; margin-right: 12px; color: var(--primary);"></i>
+                <i class="ph ph-trash" style="cursor: pointer; color: red;"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="padding: 0; overflow: hidden;">
+          <img src="images/gallery-2.webp" alt="Event" style="width: 100%; height: 200px; object-fit: cover;">
+          <div style="padding: 20px;">
+            <h4 style="margin: 0 0 10px 0;">Corporate Retreat</h4>
+            <p style="color: var(--text-light); font-size: 0.875rem;">A 3-day corporate team building event at a serene mountain resort.</p>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px;">
+              <span style="font-weight: 600; color: var(--primary);">$5,000</span>
+              <div>
+                <i class="ph ph-pencil-simple" style="cursor: pointer; margin-right: 12px; color: var(--primary);"></i>
+                <i class="ph ph-trash" style="cursor: pointer; color: red;"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: Revenue -->
+    <div id="tab-revenue" class="dashboard-container tab-content">
+      <div class="card">
+        <h3>Advanced Revenue Analytics</h3>
+        <p style="color: var(--text-light);">Deep dive into profit margins, vendor payouts, and quarterly projections.</p>
+      </div>
+    </div>
+
+    <!-- TAB 6: Reports -->
+    <div id="tab-reports" class="dashboard-container tab-content">
+      <div class="card">
+        <h3>System Reports</h3>
+        <p style="color: var(--text-light);">Generate PDF and Excel reports for stakeholders.</p>
+      </div>
+    </div>
+
+    <!-- TAB 7: Roles -->
+    <div id="tab-roles" class="dashboard-container tab-content">
+      <div class="card">
+        <h3>Role & Security Management</h3>
+        <p style="color: var(--text-light);">Assign RBAC (Role-Based Access Control) to staff members.</p>
+      </div>
+    </div>
+
+    <!-- TAB 8: Settings -->
+    <div id="tab-settings" class="dashboard-container tab-content">
+      <div class="card">
+        <h3>Global Settings</h3>
+        <p style="color: var(--text-light);">Modify site name, maintenance mode, and global API keys.</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Sidebar Toggle
+    const toggleBtn = document.getElementById('toggleSidebar');
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('mainContent');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+    const closeSidebarBtn = document.getElementById('closeSidebar');
+
+    function closeSidebarMobile() {
+      sidebar.classList.remove('active');
+      if (mobileOverlay) mobileOverlay.classList.remove('active');
+      document.body.classList.remove('sidebar-open');
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      if(window.innerWidth > 768) {
+        sidebar.classList.toggle('collapsed');
+        mainContent.style.marginLeft = sidebar.classList.contains('collapsed') ? '0' : '260px';
+      } else {
+        sidebar.classList.toggle('active');
+        if (mobileOverlay) mobileOverlay.classList.toggle('active');
+        document.body.classList.toggle('sidebar-open');
+      }
+    });
+
+    if (mobileOverlay) {
+      mobileOverlay.addEventListener('click', closeSidebarMobile);
+    }
+    if (closeSidebarBtn) {
+      closeSidebarBtn.addEventListener('click', closeSidebarMobile);
+    }
+
+    // Dark Mode Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-theme');
+      const icon = themeToggle.querySelector('i');
+      if(document.body.classList.contains('dark-theme')) {
+        icon.classList.replace('ph-moon', 'ph-sun');
+      } else {
+        icon.classList.replace('ph-sun', 'ph-moon');
+      }
+    });
+
+    // Initialize Admin Data from localStorage
+    const savedEmail = localStorage.getItem('userEmail');
+    if (savedEmail) {
+      document.getElementById('adminEmailDisplay').innerText = savedEmail;
+    }
+
+    // Tab Switching Logic
+    const navItems = document.querySelectorAll('.nav-menu .nav-item[data-target]');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    navItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Remove active class from all nav items and tabs
+        navItems.forEach(n => n.classList.remove('active'));
+        tabContents.forEach(t => t.classList.remove('active'));
+
+        // Add active class to clicked nav item
+        item.classList.add('active');
+        
+        // Show corresponding tab
+        const targetId = item.getAttribute('data-target');
+        document.getElementById(targetId).classList.add('active');
+
+        // Close sidebar on mobile after clicking
+        if(window.innerWidth <= 768) {
+          closeSidebarMobile();
+        }
+      });
+    });
+
+    // Chart.js Initialization
+    const ctx = document.getElementById('revenueChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+        datasets: [{
+          label: 'Revenue ($)',
+          data: [12000, 19000, 15000, 25000, 22000, 30000, 28000, 35000],
+          backgroundColor: '#FF6B00',
+          borderRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
